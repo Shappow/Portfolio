@@ -1,0 +1,23 @@
+---
+interface Props {
+  status: 'stable' | 'wip' | 'archived';
+}
+
+const { status } = Astro.props;
+
+const config = {
+  stable:   { label: 'STABLE',   color: '#00D4B8', glow: 'rgba(0,212,184,0.4)' },
+  wip:      { label: 'WIP',      color: '#F59E0B', glow: 'rgba(245,158,11,0.4)' },
+  archived: { label: 'ARCHIVED', color: '#6B7280', glow: 'rgba(107,114,128,0.4)' },
+};
+
+const { label, color, glow } = config[status];
+---
+
+<span class="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold">
+  <span
+    class="inline-block w-1.5 h-1.5 rounded-full"
+    style={`background: ${color}; box-shadow: 0 0 4px ${glow};`}
+  ></span>
+  <span style={`color: ${color};`}>{label}</span>
+</span>

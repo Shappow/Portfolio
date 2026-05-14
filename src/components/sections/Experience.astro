@@ -1,0 +1,46 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import AnimationWrapper from '../ui/AnimationWrapper.astro';
+import { experiences } from '../../data/experience';
+---
+
+<section id="experience" class="page-section">
+  <div class="max-w-5xl mx-auto w-full px-8 py-16">
+    <AnimationWrapper>
+      <SectionTitle id="experience" label="Expériences Pro." comment="git log --oneline" />
+
+      <div class="relative pl-8">
+        <div class="absolute left-0 top-2 bottom-2 w-px"
+          style="background: linear-gradient(to bottom, var(--accent-teal), var(--border), transparent);">
+        </div>
+
+        <div class="flex flex-col gap-8">
+          {experiences.map((exp) => (
+            <div class="relative">
+              <div class="absolute -left-[35px] top-1.5 w-2.5 h-2.5 rounded-full"
+                style={`background: ${exp.current ? 'var(--accent-teal)' : 'var(--bg-surface-2)'}; border: 1px solid ${exp.current ? 'var(--accent-teal)' : 'var(--border)'}; box-shadow: ${exp.current ? '0 0 8px var(--accent-glow)' : 'none'};`}>
+              </div>
+              <div class="bento-card p-5">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                  <div>
+                    <h3 class="font-mono text-sm font-bold" style="color: var(--text-primary);">{exp.role}</h3>
+                    <p class="font-mono text-xs" style="color: var(--accent-teal);">{exp.company} — {exp.location}</p>
+                  </div>
+                  <span class="font-mono text-xs whitespace-nowrap" style="color: var(--text-muted);">{exp.period}</span>
+                </div>
+                <ul class="flex flex-col gap-1.5">
+                  {exp.bullets.map((b) => (
+                    <li class="flex gap-2 text-xs" style="color: var(--text-secondary);">
+                      <span style="color: var(--accent-dim);" class="mt-0.5 shrink-0">▸</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </AnimationWrapper>
+  </div>
+</section>

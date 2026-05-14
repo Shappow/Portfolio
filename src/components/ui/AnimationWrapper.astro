@@ -1,0 +1,34 @@
+---
+// Slot prévu pour injecter des animations Framer Motion plus tard.
+// Pour l'instant, un simple fade-in CSS est appliqué.
+interface Props {
+  delay?: number; // ms
+  class?: string;
+}
+
+const { delay = 0, class: className = '' } = Astro.props;
+---
+
+<div
+  class={`anim-wrapper ${className}`}
+  style={`animation-delay: ${delay}ms;`}
+>
+  <slot />
+</div>
+
+<style>
+  .anim-wrapper {
+    animation: fadeInUp 0.5s ease both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

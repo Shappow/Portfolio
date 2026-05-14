@@ -1,0 +1,35 @@
+---
+import BentoCard from '../ui/BentoCard.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import AnimationWrapper from '../ui/AnimationWrapper.astro';
+import { skillCategories } from '../../data/skills';
+---
+
+<section id="competences" class="page-section">
+  <div class="max-w-5xl mx-auto w-full px-8 py-16">
+    <AnimationWrapper>
+      <SectionTitle id="competences" label="Compétences" comment="tech_stack[]" />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {skillCategories.map((cat) => (
+          <BentoCard>
+            <p class="font-mono text-xs mb-4" style="color: var(--accent-dim);">// {cat.label}</p>
+            <div class="flex flex-col gap-4">
+              {cat.skills.map((skill) => (
+                <div>
+                  <div class="flex justify-between items-baseline mb-1">
+                    <span class="font-mono text-xs" style="color: var(--text-secondary);">{skill.name}</span>
+                    <span class="font-mono text-[10px]" style="color: var(--text-muted);">{skill.level}%</span>
+                  </div>
+                  <div class="skill-bar-track">
+                    <div class="skill-bar-fill" style={`width: ${skill.level}%;`}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </BentoCard>
+        ))}
+      </div>
+    </AnimationWrapper>
+  </div>
+</section>

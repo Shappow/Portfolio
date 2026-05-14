@@ -1,0 +1,62 @@
+---
+import BentoCard from '../ui/BentoCard.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import AnimationWrapper from '../ui/AnimationWrapper.astro';
+
+const stats = [
+  { label: 'MCUs used',    value: '12+' },
+  { label: 'PCBs designed', value: '8+' },
+  { label: 'Years exp.',   value: '3+' },
+  { label: 'Protocols',    value: '10+' },
+];
+---
+
+<section id="about" class="pt-20 pb-24 px-8 max-w-5xl mx-auto">
+  <AnimationWrapper>
+    <SectionTitle id="about" label="À propos" comment="who_am_i.md" />
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Bio -->
+      <BentoCard class="md:col-span-2">
+        <p class="font-mono text-xs mb-3" style="color: var(--accent-dim);">// README.md</p>
+        <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">
+          Ingénieur passionné par l'électronique embarquée et le développement bas niveau.
+          Je conçois des systèmes alliant hardware et software, du schéma électronique
+          au firmware en C/C++.
+        </p>
+        <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+          Mon terrain de jeu : microcontrôleurs, RTOS, protocoles de communication industriels,
+          et conception PCB. Je cherche à produire du code robuste et des circuits fiables.
+        </p>
+
+        <!-- Stat chips -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+          {stats.map((s) => (
+            <div
+              class="text-center p-2 rounded"
+              style="background: var(--bg-surface-2); border: 1px solid var(--border);"
+            >
+              <div class="font-mono text-lg font-bold" style="color: var(--accent-teal);">{s.value}</div>
+              <div class="font-mono text-[10px]" style="color: var(--text-muted);">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </BentoCard>
+
+      <!-- Photo / avatar placeholder -->
+      <BentoCard padded={false} class="flex items-center justify-center min-h-48 overflow-hidden">
+        <div class="text-center p-6">
+          <!-- Remplace ce bloc par une balise <img> quand tu as ta photo -->
+          <div
+            class="w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center font-mono text-3xl"
+            style="background: var(--bg-surface-2); border: 2px solid var(--accent-dim); color: var(--accent-teal);"
+          >
+            TF
+          </div>
+          <p class="font-mono text-xs" style="color: var(--accent-teal);">Théo Feugnet</p>
+          <p class="font-mono text-[10px] mt-1" style="color: var(--text-muted);">Embedded Engineer</p>
+        </div>
+      </BentoCard>
+    </div>
+  </AnimationWrapper>
+</section>

@@ -1,0 +1,81 @@
+---
+import ThemeToggle from '../ui/ThemeToggle.astro';
+
+const navItems = [
+  { id: 'hero',       label: 'INIT',       shortLabel: '01' },
+  { id: 'about',      label: 'ABOUT',      shortLabel: '02' },
+  { id: 'skills',     label: 'SKILLS',     shortLabel: '03' },
+  { id: 'projects',   label: 'PROJECTS',   shortLabel: '04' },
+  { id: 'experience', label: 'EXP',        shortLabel: '05' },
+  { id: 'contact',    label: 'CONTACT',    shortLabel: '06' },
+];
+---
+
+<nav
+  class="fixed left-0 top-0 h-full w-14 flex flex-col items-center justify-center gap-6 z-50"
+  style="border-right: 1px solid var(--border); background: var(--nav-bg); backdrop-filter: blur(12px);"
+  aria-label="Navigation principale"
+>
+  <!-- Logo / indicateur haut -->
+  <div class="absolute top-6 font-mono text-xs" style="color: var(--accent-teal); writing-mode: vertical-rl;">
+    PCB
+  </div>
+
+  <!-- Liens de navigation -->
+  {navItems.map((item) => (
+    <a
+      href={`#${item.id}`}
+      class="group flex flex-col items-center gap-1 text-center transition-all duration-200"
+      aria-label={item.label}
+    >
+      <span
+        class="font-mono text-[10px] font-bold transition-colors duration-200"
+        style="color: var(--text-muted);"
+        data-nav-num={item.shortLabel}
+      >
+        {item.shortLabel}
+      </span>
+      <div
+        class="w-1 h-1 rounded-full transition-all duration-200"
+        style="background: var(--text-muted);"
+        data-nav-dot
+      ></div>
+    </a>
+  ))}
+
+  <!-- Toggle thème + version en bas -->
+  <div class="absolute bottom-6 flex flex-col items-center gap-3">
+    <ThemeToggle />
+    <div class="font-mono text-[9px]" style="color: var(--text-muted); writing-mode: vertical-rl;">
+      v1.0.0
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Highlight du lien actif selon la section visible
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav[aria-label] a');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            const isActive = link.getAttribute('href') === `#${id}`;
+            const dot = link.querySelector('[data-nav-dot]') as HTMLElement | null;
+            const num = link.querySelector('[data-nav-num]') as HTMLElement | null;
+            if (dot) dot.style.background = isActive ? 'var(--accent-teal)' : 'var(--text-muted)';
+            if (num) num.style.color = isActive ? 'var(--accent-teal)' : 'var(--text-muted)';
+            if (isActive) dot?.style.setProperty('box-shadow', '0 0 6px var(--accent-glow)');
+            else dot?.style.removeProperty('box-shadow');
+          });
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  sections.forEach((s) => observer.observe(s));
+</script>

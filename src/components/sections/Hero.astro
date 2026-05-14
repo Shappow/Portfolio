@@ -1,0 +1,68 @@
+---
+import AnimationWrapper from '../ui/AnimationWrapper.astro';
+
+const navItems = [
+  { id: 'diplomes',    label: 'Diplômes' },
+  { id: 'competences', label: 'Compétences' },
+  { id: 'experience',  label: 'Exp. Pro' },
+  { id: 'projects',    label: 'Projets' },
+  { id: 'contact',     label: 'Contact' },
+];
+---
+
+<section id="hero" class="page-section" style="justify-content: flex-start;">
+  <div class="max-w-4xl mx-auto w-full px-8 pt-[13vh] text-center">
+    <AnimationWrapper>
+      <div class="font-mono text-sm mb-8 flex items-center justify-center gap-2" style="color: var(--accent-dim);">
+        <span class="inline-block w-2 h-2 rounded-full" style="background: var(--accent-teal); box-shadow: 0 0 8px var(--accent-glow);"></span>
+        <span>system.init() — OK</span>
+      </div>
+
+      <h1 class="font-mono text-6xl sm:text-7xl lg:text-8xl font-bold mb-4 glow-teal" style="color: var(--text-primary);">
+        Théo Feugnet
+      </h1>
+
+      <div class="font-mono text-2xl sm:text-3xl mb-2" style="color: var(--accent-teal);">
+        <span id="typewriter-text"></span><span class="cursor-blink" style="color: var(--accent-teal);">_</span>
+      </div>
+
+      <p class="font-mono text-base mt-8 mb-12" style="color: var(--text-muted);">
+        <span style="color: var(--accent-dim);">&gt;</span> Ingénieur électronique &amp; informatique embarquée
+      </p>
+
+      <div id="hero-section-links" class="flex flex-wrap items-center justify-center gap-3">
+        {navItems.map((item) => (
+          <a
+            href={`#${item.id}`}
+            class="font-mono text-sm px-6 py-2.5 rounded transition-all duration-200"
+            style="border: 1px solid var(--border); color: var(--text-secondary); background: var(--card-bg); backdrop-filter: blur(8px);"
+            onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.color='var(--accent-teal)'; this.style.background='var(--bg-surface-2)'"
+            onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'; this.style.background='var(--card-bg)'"
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </AnimationWrapper>
+  </div>
+</section>
+
+<script>
+  const titles = ['Firmware Engineer', 'PCB Designer', 'Embedded Systems Dev', 'Hardware Hacker'];
+  let titleIdx = 0, charIdx = 0, deleting = false;
+  const el = document.getElementById('typewriter-text');
+
+  function tick() {
+    if (!el) return;
+    const current = titles[titleIdx];
+    if (!deleting) {
+      el.textContent = current.slice(0, ++charIdx);
+      if (charIdx === current.length) { deleting = true; setTimeout(tick, 1800); return; }
+    } else {
+      el.textContent = current.slice(0, --charIdx);
+      if (charIdx === 0) { deleting = false; titleIdx = (titleIdx + 1) % titles.length; setTimeout(tick, 400); return; }
+    }
+    setTimeout(tick, deleting ? 50 : 80);
+  }
+  setTimeout(tick, 800);
+</script>

@@ -1,0 +1,73 @@
+---
+import BentoCard from '../ui/BentoCard.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import StatusDot from '../ui/StatusDot.astro';
+import TechBadge from '../ui/TechBadge.astro';
+import AnimationWrapper from '../ui/AnimationWrapper.astro';
+import { projects } from '../../data/projects';
+
+const featured = projects.filter((p) => p.featured);
+const others   = projects.filter((p) => !p.featured);
+---
+
+<section id="projects" class="page-section">
+  <div class="max-w-5xl mx-auto w-full px-8 py-16">
+    <AnimationWrapper>
+      <SectionTitle id="projects" label="Projets" comment={`${projects.length} entries`} />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        {featured.map((proj) => (
+          <BentoCard class="flex flex-col gap-3">
+            <div class="flex items-start justify-between">
+              <span class="font-mono text-xs" style="color: var(--accent-dim);">{proj.id}</span>
+              <StatusDot status={proj.status} />
+            </div>
+            <h3 class="font-mono text-base font-bold" style="color: var(--text-primary);">{proj.title}</h3>
+            <p class="text-xs leading-relaxed flex-1" style="color: var(--text-secondary);">{proj.description}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {proj.stack.map((t) => <TechBadge label={t} />)}
+            </div>
+            <div class="flex gap-3 pt-1">
+              {proj.github && (
+                <a href={proj.github} class="font-mono text-xs transition-colors duration-150" style="color: var(--accent-dim);"
+                  onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-dim)'">
+                  [GitHub →]
+                </a>
+              )}
+              {proj.demo && (
+                <a href={proj.demo} class="font-mono text-xs transition-colors duration-150" style="color: var(--accent-dim);"
+                  onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-dim)'">
+                  [Demo →]
+                </a>
+              )}
+            </div>
+          </BentoCard>
+        ))}
+      </div>
+
+      {others.length > 0 && (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {others.map((proj) => (
+            <BentoCard class="flex flex-col gap-2">
+              <div class="flex items-start justify-between">
+                <span class="font-mono text-[10px]" style="color: var(--accent-dim);">{proj.id}</span>
+                <StatusDot status={proj.status} />
+              </div>
+              <h3 class="font-mono text-sm font-bold" style="color: var(--text-primary);">{proj.title}</h3>
+              <p class="text-xs leading-relaxed flex-1" style="color: var(--text-secondary);">{proj.description}</p>
+              <div class="flex flex-wrap gap-1">
+                {proj.stack.map((t) => <TechBadge label={t} />)}
+              </div>
+              {proj.github && (
+                <a href={proj.github} class="font-mono text-xs mt-1 transition-colors duration-150" style="color: var(--accent-dim);"
+                  onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-dim)'">
+                  [GitHub →]
+                </a>
+              )}
+            </BentoCard>
+          ))}
+        </div>
+      )}
+    </AnimationWrapper>
+  </div>
+</section>

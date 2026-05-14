@@ -1,0 +1,51 @@
+---
+import BentoCard from '../ui/BentoCard.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import AnimationWrapper from '../ui/AnimationWrapper.astro';
+
+const links = [
+  { label: 'GitHub',   handle: '@ton-github',      href: 'https://github.com/',  icon: '⌥' },
+  { label: 'LinkedIn', handle: '@ton-linkedin',     href: 'https://linkedin.com/', icon: '⊞' },
+  { label: 'Email',    handle: 'theo@example.com',  href: 'mailto:theo@example.com', icon: '✉' },
+];
+---
+
+<section id="contact" class="page-section">
+  <div class="max-w-5xl mx-auto w-full px-8 py-16">
+    <AnimationWrapper>
+      <SectionTitle id="contact" label="Contact" comment="send_message()" />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <BentoCard>
+          <p class="font-mono text-xs mb-4" style="color: var(--accent-dim);">// terminal</p>
+          <div class="font-mono text-xs space-y-1" style="color: var(--text-secondary);">
+            <p><span style="color: var(--accent-teal);">$</span> whoami</p>
+            <p style="color: var(--text-muted);">theo_feugnet</p>
+            <p class="mt-2"><span style="color: var(--accent-teal);">$</span> cat available.txt</p>
+            <p style="color: var(--text-muted);">Ouvert aux opportunités en électronique embarquée.</p>
+            <p class="mt-2"><span style="color: var(--accent-teal);">$</span> send_message --to=theo<span class="cursor-blink">_</span></p>
+          </div>
+        </BentoCard>
+
+        <BentoCard class="flex flex-col gap-3">
+          <p class="font-mono text-xs mb-1" style="color: var(--accent-dim);">// links[]</p>
+          {links.map((link) => (
+            <a href={link.href} target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-3 p-3 rounded transition-all duration-200"
+              style="border: 1px solid var(--border);"
+              onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.background='var(--bg-surface-2)'"
+              onmouseout="this.style.borderColor='var(--border)'; this.style.background='transparent'"
+            >
+              <span class="font-mono text-lg w-6 text-center" style="color: var(--accent-teal);">{link.icon}</span>
+              <div>
+                <p class="font-mono text-xs font-bold" style="color: var(--text-primary);">{link.label}</p>
+                <p class="font-mono text-[10px]" style="color: var(--text-muted);">{link.handle}</p>
+              </div>
+              <span class="ml-auto font-mono text-xs" style="color: var(--accent-dim);">→</span>
+            </a>
+          ))}
+        </BentoCard>
+      </div>
+    </AnimationWrapper>
+  </div>
+</section>
