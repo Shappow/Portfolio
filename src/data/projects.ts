@@ -1,50 +1,44 @@
 export interface Project {
   id: string;
   title: string;
+  type: 'perso' | 'univ';
   description: string;
   stack: string[];
   status: 'stable' | 'wip' | 'archived';
   featured: boolean;
   github?: string;
   demo?: string;
-  image?: string;
 }
 
 export const projects: Project[] = [
   {
     id: 'proj-01',
-    title: 'Nom du projet 1',
-    description: 'Description courte du projet. Remplace ce texte par ta vraie description.',
-    stack: ['STM32', 'C', 'FreeRTOS', 'SPI'],
-    status: 'stable',
+    title: 'Réplique du Pip-Boy de Fallout',
+    type: 'perso',
+    description:
+      'Conception d\'un système embarqué sur Raspberry Pi 5 intégrant électronique, interface Python et composants matériels (écran, radio, audio, potentiomètres) pour un prototype fonctionnel.',
+    stack: ['Raspberry Pi 5', 'Python', 'Électronique', 'PCB'],
+    status: 'wip',
     featured: true,
-    github: '#',
   },
   {
     id: 'proj-02',
-    title: 'Nom du projet 2',
-    description: 'Description courte du projet. Remplace ce texte par ta vraie description.',
-    stack: ['ESP32', 'C++', 'MQTT', 'PCB Design'],
+    title: 'Robot autonome — Exploration de labyrinthe',
+    type: 'univ',
+    description:
+      'Conception globale (mécanique, électronique, logiciel) d\'un robot holonome. Navigation et évitement d\'obstacles sur Raspberry Pi via un capteur LIDAR.',
+    stack: ['Raspberry Pi', 'Python', 'C++', 'LIDAR'],
     status: 'stable',
     featured: true,
-    github: '#',
   },
   {
     id: 'proj-03',
-    title: 'Nom du projet 3',
-    description: 'Description courte du projet. Remplace ce texte par ta vraie description.',
-    stack: ['FPGA', 'VHDL', 'I2C'],
-    status: 'wip',
-    featured: false,
-    github: '#',
-  },
-  {
-    id: 'proj-04',
-    title: 'Nom du projet 4',
-    description: 'Description courte du projet. Remplace ce texte par ta vraie description.',
-    stack: ['ARM Cortex-M4', 'C', 'CAN Bus'],
+    title: 'Robot Sumo',
+    type: 'univ',
+    description:
+      'Création complète d\'un shield électronique sur mesure (KiCad), dimensionnement de l\'alimentation, interfaçage capteurs/moteurs et programmation embarquée des stratégies de combat.',
+    stack: ['KiCad', 'C/C++', 'Arduino', 'PCB Design'],
     status: 'stable',
-    featured: false,
-    github: '#',
+    featured: true,
   },
 ];

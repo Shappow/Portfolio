@@ -2,10 +2,12 @@
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
 
 const navItems = [
+  { id: 'about',       label: 'À propos' },
   { id: 'diplomes',    label: 'Diplômes' },
   { id: 'competences', label: 'Compétences' },
   { id: 'experience',  label: 'Exp. Pro' },
   { id: 'projects',    label: 'Projets' },
+  { id: 'passions',    label: 'Passions' },
   { id: 'contact',     label: 'Contact' },
 ];
 ---
@@ -32,15 +34,15 @@ const navItems = [
 
       <div id="hero-section-links" class="flex flex-wrap items-center justify-center gap-3">
         {navItems.map((item) => (
-          <a
-            href={`#${item.id}`}
+          <button
+            data-page={item.id}
             class="font-mono text-sm px-6 py-2.5 rounded transition-all duration-200"
-            style="border: 1px solid var(--border); color: var(--text-secondary); background: var(--card-bg); backdrop-filter: blur(8px);"
+            style="border: 1px solid var(--border); color: var(--text-secondary); background: var(--card-bg); backdrop-filter: blur(8px); cursor: pointer;"
             onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.color='var(--accent-teal)'; this.style.background='var(--bg-surface-2)'"
             onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'; this.style.background='var(--card-bg)'"
           >
             {item.label}
-          </a>
+          </button>
         ))}
       </div>
     </AnimationWrapper>

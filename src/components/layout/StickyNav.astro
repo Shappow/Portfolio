@@ -2,10 +2,12 @@
 import ThemeToggle from '../ui/ThemeToggle.astro';
 
 const navItems = [
+  { id: 'about',       label: 'À propos' },
   { id: 'diplomes',    label: 'Diplômes' },
   { id: 'competences', label: 'Compétences' },
   { id: 'experience',  label: 'Exp. Pro' },
   { id: 'projects',    label: 'Projets' },
+  { id: 'passions',    label: 'Passions' },
   { id: 'contact',     label: 'Contact' },
 ];
 ---
@@ -16,18 +18,18 @@ const navItems = [
   style="background: var(--nav-bg); backdrop-filter: blur(12px); border: 1px solid var(--border);"
   aria-label="Navigation rapide"
 >
-  <a href="#hero" class="font-mono text-[11px] px-3 py-1 rounded" style="color: var(--accent-teal); transition: color 0.15s, background 0.15s;" title="Accueil">~/</a>
+  <button data-page="hero" class="font-mono text-[11px] px-3 py-1 rounded" style="color: var(--accent-teal); background: none; border: none; cursor: pointer;" title="Accueil">~/</button>
   <div class="w-px h-4" style="background: var(--border);"></div>
 
   {navItems.map((item) => (
-    <a
-      href={`#${item.id}`}
+    <button
+      data-page={item.id}
       class="font-mono text-[11px] px-3 py-1 rounded"
-      style="color: var(--text-muted); transition: color 0.15s, background 0.15s;"
+      style="color: var(--text-muted); background: none; border: none; cursor: pointer;"
       data-sticky-link
     >
       {item.label}
-    </a>
+    </button>
   ))}
 
   <div class="w-px h-4 mx-1" style="background: var(--border);"></div>
@@ -40,7 +42,7 @@ const navItems = [
   document.addEventListener('pagechange', (e) => {
     const id = (e as CustomEvent<{ id: string }>).detail.id;
     links.forEach((link) => {
-      const isActive = link.getAttribute('href') === `#${id}`;
+      const isActive = link.getAttribute('data-page') === id;
       (link as HTMLElement).style.color      = isActive ? 'var(--accent-teal)' : 'var(--text-muted)';
       (link as HTMLElement).style.background = isActive ? 'var(--bg-surface-2)' : 'transparent';
     });

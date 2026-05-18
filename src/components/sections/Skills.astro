@@ -3,33 +3,73 @@ import BentoCard from '../ui/BentoCard.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
 import { skillCategories } from '../../data/skills';
+
+const hard = skillCategories.filter((c) => c.group === 'hard');
+const soft = skillCategories.filter((c) => c.group === 'soft');
 ---
 
 <section id="competences" class="page-section">
-  <div class="max-w-5xl mx-auto w-full px-8 py-16">
+  <div class="max-w-5xl mx-auto w-full px-8 pt-24 pb-16">
     <AnimationWrapper>
       <SectionTitle id="competences" label="Compétences" comment="tech_stack[]" />
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {skillCategories.map((cat) => (
-          <BentoCard>
-            <p class="font-mono text-xs mb-4" style="color: var(--accent-dim);">// {cat.label}</p>
-            <div class="flex flex-col gap-4">
-              {cat.skills.map((skill) => (
-                <div>
-                  <div class="flex justify-between items-baseline mb-1">
-                    <span class="font-mono text-xs" style="color: var(--text-secondary);">{skill.name}</span>
-                    <span class="font-mono text-[10px]" style="color: var(--text-muted);">{skill.level}%</span>
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+
+
+        <!-- Hard skills -->
+        <div class="flex flex-col gap-4 pr-6" style="border-right: 1px solid var(--border);">
+          <p class="font-mono text-xs flex items-center gap-2" style="color: var(--accent-teal);">
+            <span class="inline-block w-2 h-2 rounded-full" style="background: var(--accent-teal);"></span>
+            Compétences techniques
+          </p>
+          {hard.map((cat) => (
+            <BentoCard>
+              <p class="font-mono text-xs mb-4" style={`color: ${cat.color};`}>// {cat.label}</p>
+              <div class="flex flex-col gap-4">
+                {cat.skills.map((skill) => (
+                  <div>
+                    <div class="flex justify-between items-baseline mb-1">
+                      <span class="font-mono text-xs" style="color: var(--text-secondary);">{skill.name}</span>
+                      <span class="font-mono text-[10px]" style="color: var(--text-muted);">{skill.level}%</span>
+                    </div>
+                    <div class="skill-bar-track">
+                      <div class="skill-bar-fill" style={`width: ${skill.level}%;`}></div>
+                    </div>
                   </div>
-                  <div class="skill-bar-track">
-                    <div class="skill-bar-fill" style={`width: ${skill.level}%;`}></div>
+                ))}
+              </div>
+            </BentoCard>
+          ))}
+        </div>
+
+        <!-- Soft skills -->
+        <div class="flex flex-col gap-4 pl-6">
+          <p class="font-mono text-xs flex items-center gap-2" style="color: var(--text-secondary);">
+            <span class="inline-block w-2 h-2 rounded-full" style="background: var(--text-muted);"></span>
+            Compétences transversales
+          </p>
+          {soft.map((cat) => (
+            <BentoCard>
+              <p class="font-mono text-xs mb-4" style={`color: ${cat.color};`}>// {cat.label}</p>
+              <div class="flex flex-col gap-4">
+                {cat.skills.map((skill) => (
+                  <div>
+                    <div class="flex justify-between items-baseline mb-1">
+                      <span class="font-mono text-xs" style="color: var(--text-secondary);">{skill.name}</span>
+                      <span class="font-mono text-[10px]" style="color: var(--text-muted);">{skill.level}%</span>
+                    </div>
+                    <div class="skill-bar-track">
+                      <div class="skill-bar-fill" style={`width: ${skill.level}%;`}></div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </BentoCard>
-        ))}
+                ))}
+              </div>
+            </BentoCard>
+          ))}
+        </div>
+
       </div>
+
     </AnimationWrapper>
   </div>
 </section>

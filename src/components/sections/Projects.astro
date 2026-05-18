@@ -5,13 +5,14 @@ import StatusDot from '../ui/StatusDot.astro';
 import TechBadge from '../ui/TechBadge.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
 import { projects } from '../../data/projects';
+import { techKind } from '../../utils/techKind';
 
 const featured = projects.filter((p) => p.featured);
 const others   = projects.filter((p) => !p.featured);
 ---
 
 <section id="projects" class="page-section">
-  <div class="max-w-5xl mx-auto w-full px-8 py-16">
+  <div class="max-w-5xl mx-auto w-full px-8 pt-24 pb-16">
     <AnimationWrapper>
       <SectionTitle id="projects" label="Projets" comment={`${projects.length} entries`} />
 
@@ -23,9 +24,15 @@ const others   = projects.filter((p) => !p.featured);
               <StatusDot status={proj.status} />
             </div>
             <h3 class="font-mono text-base font-bold" style="color: var(--text-primary);">{proj.title}</h3>
+            <span class="font-mono text-[9px] w-fit px-1.5 py-0.5 rounded"
+              style={proj.type === 'perso'
+                ? 'background: rgba(0,212,184,0.1); color: var(--accent-teal); border: 1px solid rgba(0,212,184,0.25);'
+                : 'background: rgba(126,184,176,0.1); color: var(--text-secondary); border: 1px solid var(--border);'}>
+              {proj.type === 'perso' ? 'Personnel' : 'Académique'}
+            </span>
             <p class="text-xs leading-relaxed flex-1" style="color: var(--text-secondary);">{proj.description}</p>
             <div class="flex flex-wrap gap-1.5">
-              {proj.stack.map((t) => <TechBadge label={t} />)}
+              {proj.stack.map((t) => <TechBadge label={t} kind={techKind(t)} />)}
             </div>
             <div class="flex gap-3 pt-1">
               {proj.github && (
@@ -54,9 +61,15 @@ const others   = projects.filter((p) => !p.featured);
                 <StatusDot status={proj.status} />
               </div>
               <h3 class="font-mono text-sm font-bold" style="color: var(--text-primary);">{proj.title}</h3>
+              <span class="font-mono text-[9px] w-fit px-1.5 py-0.5 rounded"
+                style={proj.type === 'perso'
+                  ? 'background: rgba(0,212,184,0.1); color: var(--accent-teal); border: 1px solid rgba(0,212,184,0.25);'
+                  : 'background: rgba(126,184,176,0.1); color: var(--text-secondary); border: 1px solid var(--border);'}>
+                {proj.type === 'perso' ? 'Personnel' : 'Académique'}
+              </span>
               <p class="text-xs leading-relaxed flex-1" style="color: var(--text-secondary);">{proj.description}</p>
               <div class="flex flex-wrap gap-1">
-                {proj.stack.map((t) => <TechBadge label={t} />)}
+                {proj.stack.map((t) => <TechBadge label={t} kind={techKind(t)} />)}
               </div>
               {proj.github && (
                 <a href={proj.github} class="font-mono text-xs mt-1 transition-colors duration-150" style="color: var(--accent-dim);"

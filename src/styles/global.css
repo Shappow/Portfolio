@@ -68,10 +68,6 @@ body::before {
   transition: background 0.3s ease;
 }
 
-body > * {
-  position: relative;
-  z-index: 1;
-}
 
 /* ── Scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
@@ -171,3 +167,9 @@ body > * {
   transition-duration: 0.25s;
   transition-timing-function: ease;
 }
+
+/* ── Stacking ───────────────────────────────────────────────── */
+/* body::before (overlay) est z-index:0 ; les sections et la nav doivent
+   être explicitement au-dessus. Ne pas utiliser body > * car cela
+   overriderait les classes Tailwind z-* dans @layer utilities. */
+#sticky-nav { z-index: 50; }

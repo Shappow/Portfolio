@@ -4,14 +4,21 @@ import SectionTitle from '../ui/SectionTitle.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
 
 const stats = [
-  { label: 'MCUs used',    value: '12+' },
-  { label: 'PCBs designed', value: '8+' },
-  { label: 'Years exp.',   value: '3+' },
-  { label: 'Protocols',    value: '10+' },
+  { label: 'Projets réalisés',     value: '6' },
+  { label: 'Langages de prog.',    value: '5+'  },
+  { label: 'Formations suivies',  value: '4'  },
+  { label: 'Années d\'expérience', value: '3+' },
+];
+
+const contact = [
+  { icon: '📍', text: 'Rouillac, Charente' },
+  { icon: '✉️',  text: 'theo.feugnet@gmail.com' },
+  { icon: '🚗', text: 'Permis B' },
 ];
 ---
 
-<section id="about" class="pt-20 pb-24 px-8 max-w-5xl mx-auto">
+<section id="about" class="page-section" style="justify-content: center;">
+  <div class="max-w-5xl mx-auto w-full px-8 pt-24 pb-16">
   <AnimationWrapper>
     <SectionTitle id="about" label="À propos" comment="who_am_i.md" />
 
@@ -20,15 +27,15 @@ const stats = [
       <BentoCard class="md:col-span-2">
         <p class="font-mono text-xs mb-3" style="color: var(--accent-dim);">// README.md</p>
         <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">
-          Ingénieur passionné par l'électronique embarquée et le développement bas niveau.
-          Je conçois des systèmes alliant hardware et software, du schéma électronique
-          au firmware en C/C++.
+          Inspiré par l’univers des jeux vidéo et de la science-fiction, je me suis tourné
+          vers la programmation et l’électronique. Mon objectif est de concevoir des
+          systèmes embarqués alliant le monde virtuel au monde réel.
         </p>
         <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
-          Mon terrain de jeu : microcontrôleurs, RTOS, protocoles de communication industriels,
-          et conception PCB. Je cherche à produire du code robuste et des circuits fiables.
-        </p>
-
+          Mon terrain de jeu : les microcontrôleurs, la programmation bas niveau, 
+          les protocoles de communication industriels et la conception PCB. 
+          Je cherche à produire du code robuste et des circuits fiables qui 
+          accomplissent exactement ce qu'on attend d'eux, sans compromis.
         <!-- Stat chips -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
           {stats.map((s) => (
@@ -43,20 +50,27 @@ const stats = [
         </div>
       </BentoCard>
 
-      <!-- Photo / avatar placeholder -->
-      <BentoCard padded={false} class="flex items-center justify-center min-h-48 overflow-hidden">
-        <div class="text-center p-6">
-          <!-- Remplace ce bloc par une balise <img> quand tu as ta photo -->
-          <div
-            class="w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center font-mono text-3xl"
-            style="background: var(--bg-surface-2); border: 2px solid var(--accent-dim); color: var(--accent-teal);"
-          >
-            TF
+      <!-- Photo / contact -->
+      <BentoCard padded={false} class="flex flex-col items-center justify-center min-h-48 overflow-hidden">
+        <div class="text-center p-6 w-full">
+          <img
+            src="/theo.jpg"
+            alt="Théo Feugnet"
+            class="w-36 h-36 rounded-full mx-auto mb-4 object-cover"
+            style="border: 2px solid var(--accent-dim);"
+          />
+          <p class="font-mono text-xs font-bold" style="color: var(--accent-teal);">Théo Feugnet</p>
+          <p class="font-mono text-[10px] mt-1 mb-4" style="color: var(--text-muted);">Embedded Engineer</p>
+          <div class="flex flex-col gap-1.5 text-left">
+            {contact.map((c) => (
+              <p class="font-mono text-[10px] flex gap-2 items-center" style="color: var(--text-secondary);">
+                <span>{c.icon}</span><span>{c.text}</span>
+              </p>
+            ))}
           </div>
-          <p class="font-mono text-xs" style="color: var(--accent-teal);">Théo Feugnet</p>
-          <p class="font-mono text-[10px] mt-1" style="color: var(--text-muted);">Embedded Engineer</p>
         </div>
       </BentoCard>
     </div>
   </AnimationWrapper>
+  </div>
 </section>
