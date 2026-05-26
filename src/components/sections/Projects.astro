@@ -23,6 +23,9 @@ const others   = projects.filter((p) => !p.featured);
               <span class="font-mono text-xs" style="color: var(--accent-dim);">{proj.id}</span>
               <StatusDot status={proj.status} />
             </div>
+            {proj.image && (
+              <img src={proj.image} alt={proj.title} class="w-full rounded object-cover" style="max-height: 180px;" />
+            )}
             <h3 class="font-mono text-base font-bold" style="color: var(--text-primary);">{proj.title}</h3>
             <span class="font-mono text-[9px] w-fit px-1.5 py-0.5 rounded"
               style={proj.type === 'perso'

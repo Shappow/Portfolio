@@ -22,12 +22,20 @@ const passions = [
     pipboy: true,
   },
   {
+    id: 'simulation',
+    category: 'Jeux de Simulation',
+    title: 'Simulation de Vol',
+    ref: 'DCS — Digital Combat Simulator',
+    color: '#38BDF8',
+    body: 'Intrigué par la complexité de l\'aviation militaire, je me suis plongé dans la simulation de vol à travers DCS (Digital Combat Simulator), un simulateur reconnu pour sa très haute fidélité. Prendre les commandes de ces aéronefs ne s\'improvise pas : cela exige un apprentissage exigeant, une rigueur absolue et une attention de tous les instants, sous peine d\'en perdre immédiatement le contrôle. Bien plus qu\'un simple loisir, cette pratique me permet de développer concrètement mon niveau d\'exigence, ma méthodologie et ma concentration.',
+  },
+  {
     id: 'strategy',
     category: 'Jeux de Stratégie',
     title: 'Micro & Macro-Management',
-    ref: 'Broken Arrow & Stellaris',
+    ref: 'Stellaris — Paradox Interactive',
     color: '#A78BFA',
-    body: 'Ces jeux me passionnent car ils me permettent d\'entraîner mes compétences en micro et macro-management, propres aux jeux de stratégie, tout en évoluant dans des mondes captivants. Ils m\'obligent à faire preuve de rigueur et à prendre des décisions cruciales au fur et à mesure de la partie, au risque de perdre de précieuses ressources.',
+    body: 'Stellaris me passionne car il me permet d\'entraîner mes compétences en micro et macro-management tout en évoluant dans un univers galactique complexe. Il m\'oblige à faire preuve de rigueur et à prendre des décisions cruciales au fur et à mesure de la partie, au risque de perdre de précieuses ressources.',
   },
 ];
 ---
@@ -39,11 +47,11 @@ const passions = [
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {passions.map((p) => (
-          <BentoCard class={`flex flex-col gap-3 ${p.id === 'strategy' ? 'md:col-span-2' : ''}`}>
+          <BentoCard class="flex flex-col gap-3">
             <div class="flex items-start justify-between gap-3">
               <div>
-                <p class="font-mono text-[10px] mb-0.5" style="color: var(--text-muted);">{p.ref}</p>
                 <h3 class="font-mono text-sm font-bold" style="color: var(--text-primary);">{p.title}</h3>
+                <p class="font-mono text-xs font-semibold mt-0.5" style={`color: ${p.color};`}>{p.ref}</p>
               </div>
               <span
                 class="font-mono text-[9px] px-2 py-0.5 rounded shrink-0"
@@ -57,6 +65,15 @@ const passions = [
 
             {p.id === 'cyberpunk' && (
               <img src="/Cyberpunk.gif" alt="Cyberpunk" class="w-full rounded object-cover" style="max-height: 180px;" />
+            )}
+            {p.id === 'fallout' && (
+              <img src="/fallout.webp" alt="Fallout" class="w-full rounded object-cover" style="max-height: 180px;" />
+            )}
+            {p.id === 'simulation' && (
+              <img src="/DCS.png" alt="DCS" class="w-full rounded object-cover" style="max-height: 180px;" />
+            )}
+            {p.id === 'strategy' && (
+              <img src="/stellaris.jpg" alt="Stellaris" class="w-full rounded object-cover" style="max-height: 180px;" />
             )}
             <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">{p.body}</p>
 

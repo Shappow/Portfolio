@@ -8,6 +8,7 @@ export interface Project {
   featured: boolean;
   github?: string;
   demo?: string;
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -20,6 +21,7 @@ export const projects: Project[] = [
     stack: ['Raspberry Pi 5', 'Python', 'Électronique', 'PCB'],
     status: 'wip',
     featured: true,
+    image: '/pip_boy.jpg',
   },
   {
     id: 'proj-02',
@@ -27,7 +29,7 @@ export const projects: Project[] = [
     type: 'univ',
     description:
       'Conception globale (mécanique, électronique, logiciel) d\'un robot holonome. Navigation et évitement d\'obstacles sur Raspberry Pi via un capteur LIDAR.',
-    stack: ['Raspberry Pi', 'Python', 'C++', 'LIDAR'],
+    stack: ['Raspberry Pi', 'Python', 'C++', 'LiDAR'],
     status: 'stable',
     featured: true,
   },

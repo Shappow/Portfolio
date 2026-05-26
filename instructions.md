@@ -1,1 +1,1 @@
-projet 1 
+Intrigué par la complexité de l'aviation militaire, je me suis plongé dans la simulation de vol à travers DCS (Digital Combat Simulator), un simulateur reconnu pour sa très haute fidélité. Prendre les commandes de ces aéronefs ne s'improvise pas : cela exige un apprentissage exigeant, une rigueur absolue et une attention de tous les instants, sous peine d'en perdre immédiatement le contrôle. Bien plus qu'un simple loisir, cette pratique me permet de développer concrètement mon niveau d'exigence, ma méthodologie et ma concentration. 
