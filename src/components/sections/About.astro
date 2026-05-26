@@ -4,10 +4,10 @@ import SectionTitle from '../ui/SectionTitle.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
 
 const stats = [
-  { label: 'Projets réalisés',     value: '6' },
-  { label: 'Langages de prog.',    value: '5+'  },
-  { label: 'Formations suivies',  value: '4'  },
-  { label: 'Années d\'expérience', value: '3+' },
+  { label: 'Projets réalisés',     value: '6',  page: 'projects'    },
+  { label: 'Langages de prog.',    value: '5+', page: 'competences' },
+  { label: 'Formations suivies',   value: '4',  page: 'diplomes'    },
+  { label: 'Années d\'expérience', value: '3+', page: 'experience'  },
 ];
 
 const contact = [
@@ -36,16 +36,30 @@ const contact = [
           les protocoles de communication industriels et la conception PCB. 
           Je cherche à produire du code robuste et des circuits fiables qui 
           accomplissent exactement ce qu'on attend d'eux, sans compromis.
+        </p>
         <!-- Stat chips -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
           {stats.map((s) => (
-            <div
-              class="text-center p-2 rounded"
-              style="background: var(--bg-surface-2); border: 1px solid var(--border);"
-            >
-              <div class="font-mono text-lg font-bold" style="color: var(--accent-teal);">{s.value}</div>
-              <div class="font-mono text-[10px]" style="color: var(--text-muted);">{s.label}</div>
-            </div>
+            s.page ? (
+              <button
+                data-page={s.page}
+                class="text-center p-2 rounded transition-all duration-200"
+                style="background: var(--bg-surface-2); border: 1px solid var(--border); cursor: pointer;"
+                onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.background='var(--bg-surface)'"
+                onmouseout="this.style.borderColor='var(--border)'; this.style.background='var(--bg-surface-2)'"
+              >
+                <div class="font-mono text-lg font-bold" style="color: var(--accent-teal);">{s.value}</div>
+                <div class="font-mono text-[10px]" style="color: var(--text-muted);">{s.label}</div>
+              </button>
+            ) : (
+              <div
+                class="text-center p-2 rounded"
+                style="background: var(--bg-surface-2); border: 1px solid var(--border);"
+              >
+                <div class="font-mono text-lg font-bold" style="color: var(--accent-teal);">{s.value}</div>
+                <div class="font-mono text-[10px]" style="color: var(--text-muted);">{s.label}</div>
+              </div>
+            )
           ))}
         </div>
       </BentoCard>
@@ -68,6 +82,16 @@ const contact = [
               </p>
             ))}
           </div>
+          <a
+            href="/CV Théo Feugnet.pdf"
+            download
+            class="font-mono text-[10px] mt-4 px-3 py-1.5 rounded flex items-center justify-center gap-2 transition-all duration-200"
+            style="border: 1px solid var(--border); color: var(--accent-teal); background: var(--bg-surface-2);"
+            onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.background='var(--bg-surface)'"
+            onmouseout="this.style.borderColor='var(--border)'; this.style.background='var(--bg-surface-2)'"
+          >
+            ↓ Télécharger le CV
+          </a>
         </div>
       </BentoCard>
     </div>
