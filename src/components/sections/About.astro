@@ -17,7 +17,7 @@ const contact = [
 ];
 ---
 
-<section id="about" class="page-section" style="justify-content: center;">
+<section id="about" class="page-section">
   <div class="max-w-5xl mx-auto w-full px-8 pt-24 pb-16">
   <AnimationWrapper>
     <SectionTitle id="about" label="À propos" comment="who_am_i.md" />
@@ -95,6 +95,29 @@ const contact = [
         </div>
       </BentoCard>
     </div>
+
+    <!-- CV intégré -->
+    <BentoCard class="mt-4">
+      <div class="flex items-center justify-between mb-3">
+        <p class="font-mono text-xs" style="color: var(--accent-dim);">// curriculum_vitae.pdf</p>
+        <a
+          href="/CV Théo Feugnet.pdf"
+          download
+          class="font-mono text-[10px] px-3 py-1 rounded transition-all duration-200"
+          style="border: 1px solid var(--border); color: var(--accent-teal); background: var(--bg-surface-2);"
+          onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.background='var(--bg-surface)'"
+          onmouseout="this.style.borderColor='var(--border)'; this.style.background='var(--bg-surface-2)'"
+        >
+          ↓ Télécharger
+        </a>
+      </div>
+      <iframe
+        src="/CV Théo Feugnet.pdf"
+        title="CV Théo Feugnet"
+        class="w-full rounded"
+        style="height: 680px; border: none; background: #fff;"
+      ></iframe>
+    </BentoCard>
   </AnimationWrapper>
   </div>
 </section>
