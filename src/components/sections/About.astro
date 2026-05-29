@@ -2,6 +2,7 @@
 import BentoCard from '../ui/BentoCard.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
+import { asset } from '../../utils/asset';
 
 const stats = [
   { label: 'Projets réalisés',     value: '6',  page: 'projects'    },
@@ -68,7 +69,7 @@ const contact = [
       <BentoCard padded={false} class="flex flex-col items-center justify-center min-h-48 overflow-hidden">
         <div class="text-center p-6 w-full">
           <img
-            src="/theo.jpg"
+            src={asset('/theo.jpg')}
             alt="Théo Feugnet"
             class="w-36 h-36 rounded-full mx-auto mb-4 object-cover"
             style="border: 2px solid var(--accent-dim);"
@@ -83,7 +84,7 @@ const contact = [
             ))}
           </div>
           <a
-            href="/CV Théo Feugnet.pdf"
+            href={asset('/CV Théo Feugnet.pdf')}
             download
             class="font-mono text-[10px] mt-4 px-3 py-1.5 rounded flex items-center justify-center gap-2 transition-all duration-200"
             style="border: 1px solid var(--border); color: var(--accent-teal); background: var(--bg-surface-2);"
@@ -101,7 +102,7 @@ const contact = [
       <div class="flex items-center justify-between mb-3">
         <p class="font-mono text-xs" style="color: var(--accent-dim);">// curriculum_vitae.pdf</p>
         <a
-          href="/CV Théo Feugnet.pdf"
+          href={asset('/CV Théo Feugnet.pdf')}
           download
           class="font-mono text-[10px] px-3 py-1 rounded transition-all duration-200"
           style="border: 1px solid var(--border); color: var(--accent-teal); background: var(--bg-surface-2);"
@@ -112,13 +113,13 @@ const contact = [
         </a>
       </div>
       <object
-        data="/CV%20Th%C3%A9o%20Feugnet.pdf"
+        data={asset('/CV Théo Feugnet.pdf')}
         type="application/pdf"
         class="w-full rounded"
         style="height: 680px;"
       >
         <embed
-          src="/CV%20Th%C3%A9o%20Feugnet.pdf"
+          src={asset('/CV Théo Feugnet.pdf')}
           type="application/pdf"
           class="w-full rounded"
           style="height: 680px;"

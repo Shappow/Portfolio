@@ -3,6 +3,7 @@ import BentoCard from '../ui/BentoCard.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
 import CardModal from '../ui/CardModal.astro';
+import { asset } from '../../utils/asset';
 
 const passions = [
   {
@@ -138,7 +139,7 @@ const passions = [
         {passions.map((p) => (
           <BentoCard
             class="flex flex-col gap-3 cursor-pointer passion-card"
-            data-modal={JSON.stringify({ id: p.id, title: p.title, ref: p.ref, color: p.color, category: p.category, image: p.image ?? null, description: p.body, details: p.details ?? {} })}
+            data-modal={JSON.stringify({ id: p.id, title: p.title, ref: p.ref, color: p.color, category: p.category, image: p.image ? asset(p.image) : null, description: p.body, details: p.details ?? {} })}
           >
             <div class="flex items-start justify-between gap-3">
               <div>
@@ -156,7 +157,7 @@ const passions = [
             <div class="w-8 h-px" style={`background: ${p.color};`}></div>
 
             {p.image && (
-              <img src={p.image} alt={p.title} class="w-full rounded object-cover" style="max-height: 180px;" />
+              <img src={asset(p.image)} alt={p.title} class="w-full rounded object-cover" style="max-height: 180px;" />
             )}
             <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">{p.body}</p>
 

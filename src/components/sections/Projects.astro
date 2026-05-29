@@ -6,6 +6,16 @@ import AnimationWrapper from '../ui/AnimationWrapper.astro';
 import CardModal from '../ui/CardModal.astro';
 import { projects } from '../../data/projects';
 import { techKind } from '../../utils/techKind';
+import { asset } from '../../utils/asset';
+
+function prefixDetails(details: any) {
+  if (!details) return {};
+  return {
+    ...details,
+    docs:  details.docs?.map((d: any) => ({ ...d, href: asset(d.href) })),
+    links: details.links,
+  };
+}
 
 const proPerso = projects.filter(p => p.type === 'pro' || p.type === 'perso');
 const univ     = projects.filter(p => p.type === 'univ');
@@ -37,7 +47,7 @@ const rows = [
                   {row.items.map((proj) => (
                     <div
                       class="proj-card bento-card p-4 flex flex-col gap-2 cursor-pointer"
-                      data-modal={JSON.stringify({ id: proj.id, title: proj.title, type: proj.type, status: proj.status, description: proj.description, image: proj.image ?? null, stack: proj.stack, details: proj.details ?? {} })}
+                      data-modal={JSON.stringify({ id: proj.id, title: proj.title, type: proj.type, status: proj.status, description: proj.description, image: proj.image ? asset(proj.image) : null, stack: proj.stack, details: prefixDetails(proj.details) })}
                       style="transition: border-color 0.2s, box-shadow 0.2s;"
                       onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.boxShadow='0 0 16px rgba(0,212,184,0.15)'"
                       onmouseout="this.style.borderColor=''; this.style.boxShadow=''"
@@ -48,7 +58,7 @@ const rows = [
                       </div>
 
                       {proj.image && (
-                        <img src={proj.image} alt={proj.title} class="w-full rounded" style="object-fit: contain; max-height: 220px;" />
+                        <img src={asset(proj.image)} alt={proj.title} class="w-full rounded" style="object-fit: contain; max-height: 220px;" />
                       )}
 
                       <h3 class="font-mono text-sm font-bold leading-snug" style="color: var(--text-primary);">{proj.title}</h3>

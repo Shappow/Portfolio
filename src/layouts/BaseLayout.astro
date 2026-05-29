@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { asset } from '../utils/asset';
 
 interface Props {
   title?: string;
@@ -10,6 +11,9 @@ const {
   title = 'Portfolio — Électronique & Embarqué',
   description = 'Portfolio d\'ingénierie électronique et informatique embarquée',
 } = Astro.props;
+
+const bgDark  = asset('/bg-pcb.jpg');
+const bgLight = asset('/bg-pcb-light.jpg');
 ---
 
 <html lang="fr">
@@ -17,7 +21,11 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={asset('/favicon.svg')} />
+    <style define:vars={{ bgDark, bgLight }}>
+      :root, [data-theme="dark"] { --bg-image: url(var(--bgDark)); }
+      [data-theme="light"]       { --bg-image: url(var(--bgLight)); }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
