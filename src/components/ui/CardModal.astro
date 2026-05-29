@@ -41,13 +41,13 @@
 
       <!-- Contexte -->
       <div id="modal-context-block" style="display:none;">
-        <p style="font-family:monospace; font-size:0.65rem; color:var(--accent-dim); margin-bottom:0.35rem;">// contexte</p>
-        <p id="modal-context" style="font-size:0.75rem; line-height:1.6; color:var(--text-secondary); padding:0.75rem; border-radius:6px; background:var(--bg-surface-2); border:1px solid var(--border);"></p>
+        <p style="font-family:monospace; font-size:0.65rem; color:#A78BFA; margin-bottom:0.35rem;">// contexte</p>
+        <p id="modal-context" style="font-size:0.75rem; line-height:1.6; color:var(--text-secondary); padding:0.75rem; border-radius:6px; border-left:3px solid #A78BFA;"></p>
       </div>
 
       <!-- Objectifs -->
       <div id="modal-objectives-block" style="display:none;">
-        <p style="font-family:monospace; font-size:0.65rem; color:var(--accent-dim); margin-bottom:0.35rem;">// objectifs[]</p>
+        <p style="font-family:monospace; font-size:0.65rem; color:#F59E0B; margin-bottom:0.35rem;">// objectifs[]</p>
         <ul id="modal-objectives" style="display:flex; flex-direction:column; gap:0.4rem; list-style:none; padding:0; margin:0;"></ul>
       </div>
 
@@ -63,9 +63,12 @@
         <ul id="modal-results" style="display:flex; flex-direction:column; gap:0.4rem; list-style:none; padding:0; margin:0;"></ul>
       </div>
 
+      <!-- Sections libres (texte structuré) -->
+      <div id="modal-sections" style="display:flex; flex-direction:column; gap:0.85rem;"></div>
+
       <!-- Stack -->
       <div id="modal-stack-block" style="display:none;">
-        <p style="font-family:monospace; font-size:0.65rem; color:var(--accent-dim); margin-bottom:0.4rem;">// stack</p>
+        <p style="font-family:monospace; font-size:0.65rem; color:#60A5FA; margin-bottom:0.4rem;">// stack</p>
         <div id="modal-stack" style="display:flex; flex-wrap:wrap; gap:0.35rem;"></div>
       </div>
 
@@ -190,9 +193,30 @@
       setText('modal-context', d.context);
     } else { ctxBlock.style.display = 'none'; }
 
-    setList('modal-objectives-block', 'modal-objectives', d.objectives, 'var(--accent-dim)');
+    setList('modal-objectives-block', 'modal-objectives', d.objectives, '#F59E0B');
     setList('modal-technical-block',  'modal-technical',  d.technical,  'var(--accent-teal)');
     setList('modal-results-block',    'modal-results',    d.results,    '#4ADE80');
+
+    // Sections textuelles libres
+    const sectionsCont = document.getElementById('modal-sections')!;
+    if (d.sections?.length) {
+      const colors = ['#A78BFA', '#38BDF8', '#F59E0B', 'var(--accent-teal)', '#4ADE80', '#F472B6'];
+      sectionsCont.innerHTML = d.sections.map((s: any, i: number) => {
+        const color = colors[i % colors.length];
+        const paragraphs = s.body.split('\n\n').map((p: string) =>
+          `<p style="font-size:0.75rem; line-height:1.65; color:var(--text-secondary); margin:0;">${p.trim()}</p>`
+        ).join('');
+        return `
+          <div>
+            <p style="font-family:monospace; font-size:0.65rem; color:${color}; margin-bottom:0.35rem;">// ${s.title}</p>
+            <div style="display:flex; flex-direction:column; gap:0.5rem; padding-left:0.75rem; border-left:2px solid ${color}40;">
+              ${paragraphs}
+            </div>
+          </div>`;
+      }).join('');
+    } else {
+      sectionsCont.innerHTML = '';
+    }
 
     // Stack
     const stackBlock = document.getElementById('modal-stack-block')!;

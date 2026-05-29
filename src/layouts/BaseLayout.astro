@@ -13,8 +13,10 @@ const {
   description = 'Portfolio d\'ingénierie électronique et informatique embarquée',
 } = Astro.props;
 
-const bgDark  = asset('/bg-pcb.jpg');
-const bgLight = asset('/bg-pcb-light.jpg');
+const bgCss = `
+  :root,[data-theme="dark"]{--bg-image:url(${asset('/bg-pcb.jpg')});}
+  [data-theme="light"]{--bg-image:url(${asset('/bg-pcb-light.jpg')});}
+`;
 ---
 
 <html lang="fr">
@@ -23,10 +25,7 @@ const bgLight = asset('/bg-pcb-light.jpg');
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href={asset('/favicon.svg')} />
-    <style define:vars={{ bgDark, bgLight }}>
-      :root, [data-theme="dark"] { --bg-image: url(var(--bgDark)); }
-      [data-theme="light"]       { --bg-image: url(var(--bgLight)); }
-    </style>
+    <Fragment set:html={`<style>${bgCss}</style>`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

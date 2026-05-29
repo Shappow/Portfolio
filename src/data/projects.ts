@@ -1,8 +1,14 @@
+export interface ProjectSection {
+  title: string;
+  body: string;
+}
+
 export interface ProjectDetails {
   context?: string;
   objectives?: string[];
   technical?: string[];
   results?: string[];
+  sections?: ProjectSection[];
   docs?: { label: string; href: string }[];
   links?: { label: string; href: string }[];
 }
@@ -67,30 +73,31 @@ export const projects: Project[] = [
     featured: true,
     image: '/Robot Autonome.png',
     details: {
-      context: 'Projet académique réalisé dans le cadre du Diplôme Universitaire en Robotique à l\'IUT de Bordeaux. Inspiré de la plateforme open-source Pico Mars Rover.',
-      objectives: [
-        'Concevoir un robot holonome capable de naviguer de manière autonome',
-        'Sortir d\'un labyrinthe inconnu sans intervention humaine',
-        'Éviter les obstacles en temps réel grâce à un capteur LIDAR',
-        'Assurer la conception mécanique, électronique et logicielle complète',
-      ],
-      technical: [
-        'Architecture holonome avec roues mécanums (déplacement omnidirectionnel)',
-        'Capteur LIDAR RPLidar A1 pour la cartographie de l\'environnement',
-        'Raspberry Pi comme unité centrale de traitement',
-        '4 moteurs CC pilotés via pont en H',
-        'Algorithme de navigation par suivi de paroi (wall-following)',
-        'Développement en Python / C++ sous Linux',
-        'Alimentation par batterie LiPo',
-      ],
-      results: [
-        'Robot fonctionnel capable de naviguer dans un labyrinthe physique',
-        'Temps de résolution de labyrinthe < 3 minutes',
-        'Détection et évitement d\'obstacles en temps réel validés',
-        'Architecture mécanique légère et compacte réalisée avec succès',
+      context: 'Baptisé « Thésée », ce projet universitaire a été réalisé en équipe de quatre lors du deuxième semestre du Diplôme Universitaire en Robotique à l\'IUT de Bordeaux. L\'objectif était de concevoir de A à Z un robot capable de naviguer de manière autonome depuis l\'une des entrées d\'un labyrinthe jusqu\'à sa sortie. Mené en grande autonomie sur plusieurs semaines, tout en bénéficiant du soutien ponctuel de nos professeurs en cas de besoin, ce projet a abouti à une soutenance technique accompagnée d\'une démonstration fonctionnelle.',
+      sections: [
+        {
+          title: 'répartition_équipe',
+          body: 'Équipe Mécanique : En charge de l\'intégralité de la structure, du design à la modélisation 3D, en passant par la fabrication (impression 3D et découpe laser) et l\'assemblage du châssis.\n\nÉquipe Informatique (Mon rôle) : Responsable de l\'intelligence du robot, incluant le contrôle des servomoteurs Dynamixel, le traitement des données du LiDAR, le pilotage global et la création de l\'algorithme de sortie du labyrinthe.',
+        },
+        {
+          title: 'matériel_et_technologies',
+          body: 'L\'architecture matérielle s\'articule autour d\'une Raspberry Pi servant d\'unité centrale, couplée à un capteur LiDAR pour l\'analyse de l\'environnement. La mobilité autonome est assurée par des roues Mecanum alimentées par une batterie LiPo. Le prototypage a été réalisé grâce aux équipements du fablab (imprimante 3D et découpeuse laser).',
+        },
+        {
+          title: 'conception_mécanique',
+          body: 'Le défi majeur était d\'évoluer de manière fluide dans un environnement très exigu (les couloirs du labyrinthe mesurant seulement 30 cm de large). Le mouvement omnidirectionnel s\'est naturellement imposé. Pour minimiser l\'encombrement tout en respectant les délais, le châssis a été inspiré de la plateforme open-source Pico Mars Rover. Nous avons également privilégié la conception de pièces pour la découpe laser, offrant un gain de temps d\'usinage considérable face à l\'impression 3D classique.',
+        },
+        {
+          title: 'conception_informatique',
+          body: 'Notre mission logicielle consistait à déployer un environnement robuste pour anticiper les tests physiques. Cela a exigé une étude approfondie de la cinématique des roues Mecanum afin de calculer les sens de rotation exacts des servomoteurs pour chaque déplacement. En parallèle, nous avons développé un système de récupération des données LiDAR permettant au robot d\'interpréter la disposition des murs, d\'anticiper les obstacles et de prendre des décisions de navigation en temps réel.',
+        },
+        {
+          title: 'bilan_et_résultats',
+          body: 'Bien qu\'ambitieux, le projet s\'est heurté à des contraintes de temps. Les délais de fabrication ayant été sous-estimés, l\'équipe mécanique n\'a pu livrer le châssis assez tôt pour permettre à l\'équipe informatique de finaliser les tests d\'intégration en conditions réelles. Néanmoins, cette expérience s\'est révélée extrêmement formatrice. Elle nous a permis de maîtriser des technologies totalement nouvelles pour nous (LiDAR, cinématique Mecanum), tout en nous offrant une véritable leçon sur l\'importance cruciale de la gestion du temps et de la synchronisation entre les équipes.',
+        },
       ],
       docs: [
-        { label: 'Documentation technique', href: '/Le robot THESEE.pdf' },
+        { label: 'Documentation technique (PDF)', href: '/Le robot THESEE.pdf' },
       ],
     },
   },
