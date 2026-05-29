@@ -1,14 +1,19 @@
 ---
-import BentoCard from '../ui/BentoCard.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import StatusDot from '../ui/StatusDot.astro';
 import TechBadge from '../ui/TechBadge.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
+import CardModal from '../ui/CardModal.astro';
 import { projects } from '../../data/projects';
 import { techKind } from '../../utils/techKind';
 
-const featured = projects.filter((p) => p.featured);
-const others   = projects.filter((p) => !p.featured);
+const proPerso = projects.filter(p => p.type === 'pro' || p.type === 'perso');
+const univ     = projects.filter(p => p.type === 'univ');
+
+const rows = [
+  { id: 'pro',  label: 'Professionnel & Personnel', dot: 'var(--accent-teal)', items: proPerso },
+  { id: 'univ', label: 'Académique',                dot: '#60A5FA',  items: univ     },
+];
 ---
 
 <section id="projects" class="page-section">
@@ -16,74 +21,211 @@ const others   = projects.filter((p) => !p.featured);
     <AnimationWrapper>
       <SectionTitle id="projects" label="Projets" comment={`${projects.length} entries`} />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        {featured.map((proj) => (
-          <BentoCard class="flex flex-col gap-3">
-            <div class="flex items-start justify-between">
-              <span class="font-mono text-xs" style="color: var(--accent-dim);">{proj.id}</span>
-              <StatusDot status={proj.status} />
+      <div class="flex flex-col gap-10">
+        {rows.map((row) => (
+          <div>
+            <p class="font-mono text-xs mb-3 flex items-center gap-2" style={`color: ${row.dot};`}>
+              <span class="inline-block w-2 h-2 rounded-full" style={`background: ${row.dot};`}></span>
+              {row.label}
+            </p>
+
+            <div class="carousel-wrapper relative">
+              <button class="carousel-btn prev-btn" data-target={`track-${row.id}`} aria-label="Précédent">‹</button>
+
+              <div class="overflow-hidden" id={`vp-${row.id}`}>
+                <div class="carousel-track" id={`track-${row.id}`}>
+                  {row.items.map((proj) => (
+                    <div
+                      class="proj-card bento-card p-4 flex flex-col gap-2 cursor-pointer"
+                      data-modal={JSON.stringify({ id: proj.id, title: proj.title, type: proj.type, status: proj.status, description: proj.description, image: proj.image ?? null, stack: proj.stack, details: proj.details ?? {} })}
+                      style="transition: border-color 0.2s, box-shadow 0.2s;"
+                      onmouseover="this.style.borderColor='var(--accent-teal)'; this.style.boxShadow='0 0 16px rgba(0,212,184,0.15)'"
+                      onmouseout="this.style.borderColor=''; this.style.boxShadow=''"
+                    >
+                      <div class="flex items-start justify-between">
+                        <span class="font-mono text-[10px]" style="color: var(--accent-dim);">{proj.id}</span>
+                        <StatusDot status={proj.status} />
+                      </div>
+
+                      {proj.image && (
+                        <img src={proj.image} alt={proj.title} class="w-full rounded" style="object-fit: contain; max-height: 220px;" />
+                      )}
+
+                      <h3 class="font-mono text-sm font-bold leading-snug" style="color: var(--text-primary);">{proj.title}</h3>
+
+                      <span class="font-mono text-[9px] w-fit px-1.5 py-0.5 rounded" style={
+                        proj.type === 'perso'
+                          ? 'background:rgba(0,212,184,.1);color:var(--accent-teal);border:1px solid rgba(0,212,184,.25);'
+                          : proj.type === 'pro'
+                            ? 'background:rgba(245,158,11,.1);color:#F59E0B;border:1px solid rgba(245,158,11,.3);'
+                            : 'background:rgba(96,165,250,.1);color:#60A5FA;border:1px solid rgba(96,165,250,.3);'
+                      }>
+                        {proj.type === 'perso' ? 'Personnel' : proj.type === 'pro' ? 'Professionnel' : 'Académique'}
+                      </span>
+
+                      <p class="proj-desc text-xs leading-relaxed flex-1" style="color: var(--text-secondary);">{proj.description}</p>
+
+                      <div class="flex flex-wrap gap-1">
+                        {proj.stack.map((t) => <TechBadge label={t} kind={techKind(t)} />)}
+                      </div>
+
+                      {proj.github && (
+                        <a href={proj.github} class="font-mono text-xs mt-1 transition-colors duration-150"
+                          style="color: var(--accent-dim);"
+                          onmouseover="this.style.color='var(--accent-teal)'"
+                          onmouseout="this.style.color='var(--accent-dim)'">
+                          [GitHub →]
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button class="carousel-btn next-btn" data-target={`track-${row.id}`} aria-label="Suivant">›</button>
             </div>
-            {proj.image && (
-              <img src={proj.image} alt={proj.title} class="w-full rounded object-cover" style="max-height: 180px;" />
-            )}
-            <h3 class="font-mono text-base font-bold" style="color: var(--text-primary);">{proj.title}</h3>
-            <span class="font-mono text-[9px] w-fit px-1.5 py-0.5 rounded"
-              style={proj.type === 'perso'
-                ? 'background: rgba(0,212,184,0.1); color: var(--accent-teal); border: 1px solid rgba(0,212,184,0.25);'
-                : 'background: rgba(126,184,176,0.1); color: var(--text-secondary); border: 1px solid var(--border);'}>
-              {proj.type === 'perso' ? 'Personnel' : 'Académique'}
-            </span>
-            <p class="text-xs leading-relaxed flex-1" style="color: var(--text-secondary);">{proj.description}</p>
-            <div class="flex flex-wrap gap-1.5">
-              {proj.stack.map((t) => <TechBadge label={t} kind={techKind(t)} />)}
-            </div>
-            <div class="flex gap-3 pt-1">
-              {proj.github && (
-                <a href={proj.github} class="font-mono text-xs transition-colors duration-150" style="color: var(--accent-dim);"
-                  onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-dim)'">
-                  [GitHub →]
-                </a>
-              )}
-              {proj.demo && (
-                <a href={proj.demo} class="font-mono text-xs transition-colors duration-150" style="color: var(--accent-dim);"
-                  onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-dim)'">
-                  [Demo →]
-                </a>
-              )}
-            </div>
-          </BentoCard>
+          </div>
         ))}
       </div>
-
-      {others.length > 0 && (
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {others.map((proj) => (
-            <BentoCard class="flex flex-col gap-2">
-              <div class="flex items-start justify-between">
-                <span class="font-mono text-[10px]" style="color: var(--accent-dim);">{proj.id}</span>
-                <StatusDot status={proj.status} />
-              </div>
-              <h3 class="font-mono text-sm font-bold" style="color: var(--text-primary);">{proj.title}</h3>
-              <span class="font-mono text-[9px] w-fit px-1.5 py-0.5 rounded"
-                style={proj.type === 'perso'
-                  ? 'background: rgba(0,212,184,0.1); color: var(--accent-teal); border: 1px solid rgba(0,212,184,0.25);'
-                  : 'background: rgba(126,184,176,0.1); color: var(--text-secondary); border: 1px solid var(--border);'}>
-                {proj.type === 'perso' ? 'Personnel' : 'Académique'}
-              </span>
-              <p class="text-xs leading-relaxed flex-1" style="color: var(--text-secondary);">{proj.description}</p>
-              <div class="flex flex-wrap gap-1">
-                {proj.stack.map((t) => <TechBadge label={t} kind={techKind(t)} />)}
-              </div>
-              {proj.github && (
-                <a href={proj.github} class="font-mono text-xs mt-1 transition-colors duration-150" style="color: var(--accent-dim);"
-                  onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-dim)'">
-                  [GitHub →]
-                </a>
-              )}
-            </BentoCard>
-          ))}
-        </div>
-      )}
     </AnimationWrapper>
   </div>
 </section>
+
+<CardModal />
+
+<style>
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.3s ease;
+    align-items: stretch;
+  }
+
+  .proj-card {
+    flex: none;
+    width: 280px;
+  }
+
+  .proj-desc {
+    overflow: visible;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-surface-2);
+    border: 1px solid var(--border);
+    color: var(--accent-teal);
+    cursor: pointer;
+    transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+  }
+
+  .prev-btn { left: -20px; }
+  .next-btn { right: -20px; }
+
+  .carousel-btn:disabled {
+    opacity: 0.15;
+    cursor: default;
+  }
+
+  .carousel-btn:not(:disabled):hover {
+    background: var(--bg-surface);
+    border-color: var(--accent-teal);
+  }
+</style>
+
+<script>
+  const GAP = 16;
+
+  const offsets: Record<string, number> = {};
+
+  function getTrackContentWidth(trackId: string): number {
+    const track = document.getElementById(trackId);
+    if (!track || !track.children.length) return 0;
+    const cards = Array.from(track.children) as HTMLElement[];
+    return cards.reduce((sum, c) => sum + c.offsetWidth, 0) + (cards.length - 1) * GAP;
+  }
+
+  function getMax(trackId: string): number {
+    const vp = document.getElementById(trackId.replace('track-', 'vp-'));
+    if (!vp) return 0;
+    return Math.max(0, getTrackContentWidth(trackId) - vp.clientWidth);
+  }
+
+  function getStep(trackId: string): number {
+    const track = document.getElementById(trackId);
+    const card  = track?.children[0] as HTMLElement | null;
+    return card ? card.offsetWidth + GAP : 296;
+  }
+
+  function refreshBtns(trackId: string) {
+    const o   = offsets[trackId] ?? 0;
+    const max = getMax(trackId);
+
+    // Si tout tient dans le viewport, on cache les flèches et on remet à zéro
+    const track = document.getElementById(trackId);
+
+    if (max <= 0) {
+      offsets[trackId] = 0;
+      if (track) { track.style.transform = 'translateX(0)'; track.style.justifyContent = 'center'; }
+      document.querySelectorAll<HTMLButtonElement>(`.carousel-btn[data-target="${trackId}"]`).forEach(btn => {
+        btn.style.display = 'none';
+      });
+      return;
+    }
+
+    if (track) track.style.justifyContent = 'flex-start';
+    document.querySelectorAll<HTMLButtonElement>(`.carousel-btn[data-target="${trackId}"]`).forEach(btn => {
+      btn.style.display = 'flex';
+      if (btn.classList.contains('prev-btn')) btn.disabled = o <= 0;
+      if (btn.classList.contains('next-btn')) btn.disabled = o >= max;
+    });
+  }
+
+  function slide(trackId: string, dir: 'prev' | 'next') {
+    const max  = getMax(trackId);
+    const step = getStep(trackId);
+    let o = offsets[trackId] ?? 0;
+    o = dir === 'next' ? Math.min(o + step, max) : Math.max(o - step, 0);
+    offsets[trackId] = o;
+    const track = document.getElementById(trackId);
+    if (track) track.style.transform = `translateX(-${o}px)`;
+    refreshBtns(trackId);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.carousel-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      slide(btn.dataset.target!, btn.classList.contains('next-btn') ? 'next' : 'prev');
+    });
+  });
+
+  // Modal on card click
+  document.querySelectorAll<HTMLElement>('[data-modal]').forEach(card => {
+    card.addEventListener('click', () => {
+      const data = JSON.parse(card.dataset.modal!);
+      (window as any).openCardModal(data);
+    });
+  });
+
+  const trackIds: string[] = [];
+  document.querySelectorAll<HTMLElement>('.carousel-track').forEach(track => {
+    offsets[track.id] = 0;
+    trackIds.push(track.id);
+    refreshBtns(track.id);
+  });
+
+  window.addEventListener('resize', () => {
+    trackIds.forEach(refreshBtns);
+  });
+</script>

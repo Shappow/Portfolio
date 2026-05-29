@@ -2,6 +2,7 @@
 import BentoCard from '../ui/BentoCard.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
+import CardModal from '../ui/CardModal.astro';
 
 const passions = [
   {
@@ -10,7 +11,28 @@ const passions = [
     title: 'L\'univers du Cyberpunk',
     ref: 'Cyberpunk 2077 — CD Projekt Red',
     color: '#F59E0B',
+    image: '/Cyberpunk.gif',
     body: 'Grand fan du jeu vidéo Cyberpunk 2077 développé par le studio CD Projekt Red, cet univers a véritablement attisé mon amour pour la technologie et l\'électronique de par son ambiance futuriste, transhumaniste et aux teintes dystopiques.',
+    details: {
+      context: 'Cyberpunk 2077 est un RPG open-world développé par CD Projekt Red, sorti en décembre 2020. Le jeu se déroule dans Night City en 2077, une mégalopole dirigée par des corporations, où le transhumanisme et les augmentations cybernétiques sont monnaie courante.',
+      objectives: [
+        'Explorer un univers dystopique et futuriste riche en technologie',
+        'Incarner V, un mercenaire cherchant à s\'immortaliser dans la ville la plus dangereuse du monde',
+        'Découvrir les implications éthiques du transhumanisme et de l\'IA',
+      ],
+      technical: [
+        'Univers inspiré du jeu de rôle papier Cyberpunk 2020 de Mike Pondsmith',
+        'Système d\'augmentations cybernétiques : implants neuronaux, bras robotiques, réflexes améliorés',
+        'Netrunning : piratage de systèmes via une interface neurale directe',
+        'Représentation avancée d\'interfaces HUD intégrées directement dans le champ de vision',
+        'Architecture de Night City : 6 districts, chacun avec une identité technologique propre',
+      ],
+      results: [
+        'Jeu ayant profondément influencé ma vision de la technologie du futur',
+        'Source d\'inspiration pour mes projets d\'électronique embarquée',
+        'Réflexion sur l\'intégration homme-machine et l\'éthique de l\'IA',
+      ],
+    },
   },
   {
     id: 'fallout',
@@ -18,8 +40,29 @@ const passions = [
     title: 'L\'univers Post-Apocalyptique',
     ref: 'Fallout — Bethesda Softworks',
     color: '#4ADE80',
-    body: 'Cette licence, nous présentant un monde apocalyptique post-guerre nucléaire, me tient beaucoup à cœur car elle réussit parfaitement à lier l\'ambiance des années 50 à une technologie très avancée, tout en conservant une forte sensation \"analogique\" de l\'électronique. C\'est d\'ailleurs cette saga qui m\'a poussé à fabriquer et reproduire l\'un de ses objets phares : le Pip-Boy.',
+    image: '/fallout.webp',
+    body: 'Cette licence, nous présentant un monde apocalyptique post-guerre nucléaire, me tient beaucoup à cœur car elle réussit parfaitement à lier l\'ambiance des années 50 à une technologie très avancée, tout en conservant une forte sensation "analogique" de l\'électronique. C\'est d\'ailleurs cette saga qui m\'a poussé à fabriquer et reproduire l\'un de ses objets phares : le Pip-Boy.',
     pipboy: true,
+    details: {
+      context: 'Fallout est une franchise de RPG post-apocalyptique créée par Black Isle Studios (Fallout 1 & 2) et reprise par Bethesda Softworks (Fallout 3, 4, 76). L\'univers se base sur un rétrofuturisme des années 50 : la technologie a évolué mais l\'esthétique est restée celle d\'une Amérique d\'après-guerre froide.',
+      objectives: [
+        'Survivre dans les Terres Désolées après une guerre nucléaire mondiale en 2077',
+        'Explorer des villes en ruines peuplées de mutants, robots et factions rivales',
+        'Comprendre le fonctionnement d\'une société reconstruite après l\'apocalypse',
+      ],
+      technical: [
+        'Le Pip-Boy : terminal portable monté au poignet, interface de gestion des stats, inventaire, carte et radio',
+        'Robots et IA de type rétro-futuriste : Mr. Handy, Protectron, Sentry Bot',
+        'Technologie nucléaire omniprésente : générateurs à fusion, armures motorisées T-60',
+        'esthétique "Atompunk" : tubes à vide, cadrans analogiques, design années 50',
+        'VATS (Vault-Tec Assisted Targeting System) : système de ciblage assisté par IA',
+      ],
+      results: [
+        'Inspiration directe pour mon projet de réplique fonctionnelle du Pip-Boy',
+        'Réflexion sur le design d\'interfaces physiques rétro mais fonctionnelles',
+        'Appréciation de l\'électronique analogique comme esthétique de design',
+      ],
+    },
   },
   {
     id: 'simulation',
@@ -27,7 +70,30 @@ const passions = [
     title: 'Simulation de Vol',
     ref: 'DCS — Digital Combat Simulator',
     color: '#38BDF8',
+    image: '/DCS.png',
     body: 'Intrigué par la complexité de l\'aviation militaire, je me suis plongé dans la simulation de vol à travers DCS (Digital Combat Simulator), un simulateur reconnu pour sa très haute fidélité. Prendre les commandes de ces aéronefs ne s\'improvise pas : cela exige un apprentissage exigeant, une rigueur absolue et une attention de tous les instants, sous peine d\'en perdre immédiatement le contrôle. Bien plus qu\'un simple loisir, cette pratique me permet de développer concrètement mon niveau d\'exigence, ma méthodologie et ma concentration.',
+    details: {
+      context: 'Digital Combat Simulator (DCS) est développé par Eagle Dynamics (Russie). Reconnu comme l\'un des simulateurs de vol militaire les plus réalistes au monde, chaque module d\'avion est développé avec une fidélité extrême, souvent à partir de documentation technique réelle.',
+      objectives: [
+        'Maîtriser les procédures de démarrage, navigation et combat aérien',
+        'Appréhender la complexité des systèmes avioniques militaires modernes',
+        'Développer rigueur, concentration et méthodologie dans un environnement exigeant',
+      ],
+      technical: [
+        'Modules simulés avec cockpit 3D interactif intégral (F/A-18C Hornet, A-10C II, F-16C)',
+        'Système avionique complet : radar, RWR, TACAN, ILS, HUD, MFD',
+        'Physique de vol réaliste (modèle aérodynamique 6 DOF)',
+        'Gestion des armements guidés : missiles air-air, bombes laser, JDAM',
+        'Environnement multi-joueur (serveurs dédiés, missions coopératives)',
+        'Nécessite HOTAS (manche + manette des gaz) pour une expérience optimale',
+      ],
+      results: [
+        'Maîtrise du F/A-18C Hornet en vol basique et combat',
+        'Développement d\'une rigueur procédurale applicable à mes projets techniques',
+        'Compréhension des systèmes embarqués complexes dans l\'aviation militaire',
+        'Amélioration de la concentration et de la gestion du stress sous pression',
+      ],
+    },
   },
   {
     id: 'strategy',
@@ -35,7 +101,30 @@ const passions = [
     title: 'Micro & Macro-Management',
     ref: 'Stellaris — Paradox Interactive',
     color: '#A78BFA',
+    image: '/stellaris.jpg',
     body: 'Stellaris me passionne car il me permet d\'entraîner mes compétences en micro et macro-management tout en évoluant dans un univers galactique complexe. Il m\'oblige à faire preuve de rigueur et à prendre des décisions cruciales au fur et à mesure de la partie, au risque de perdre de précieuses ressources.',
+    details: {
+      context: 'Stellaris est un jeu de stratégie 4X (eXplore, eXpand, eXploit, eXterminate) développé par Paradox Interactive (Suède), sorti en 2016. Le joueur dirige un empire galactique au 22ème siècle, naviguant entre diplomatie, guerre, économie et recherche scientifique.',
+      objectives: [
+        'Construire et gérer un empire interstellaire depuis ses débuts jusqu\'à la domination galactique',
+        'Équilibrer diplomatie, expansion militaire, économie et développement technologique',
+        'Réagir aux crises galactiques et menaces existentielles imprévisibles',
+      ],
+      technical: [
+        'Gestion de ressources multiples en temps réel : énergie, minéraux, nourriture, influence, alliances',
+        'Arbre technologique évolutif avec 3 branches : physique, société, ingénierie',
+        'Système de politique interne : gouvernance, ethiques civiques, factions',
+        'Diplomatie complexe : alliances, fédérations, guerres déclarées, vassalisation',
+        'Combats navals stratégiques avec conception de vaisseaux modulaire',
+        'Événements aléatoires et crises de fin de partie (Essaim Arachnide, Réveil des Pré-FTL...)',
+      ],
+      results: [
+        'Développement des compétences en macro-management et planification long terme',
+        'Amélioration de la prise de décision sous contrainte de ressources',
+        'Entraînement à la gestion de priorités multiples et concurrentes',
+        'Aptitude à anticiper et gérer des crises imprévues',
+      ],
+    },
   },
 ];
 ---
@@ -47,7 +136,10 @@ const passions = [
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {passions.map((p) => (
-          <BentoCard class="flex flex-col gap-3">
+          <BentoCard
+            class="flex flex-col gap-3 cursor-pointer passion-card"
+            data-modal={JSON.stringify({ id: p.id, title: p.title, ref: p.ref, color: p.color, category: p.category, image: p.image ?? null, description: p.body, details: p.details ?? {} })}
+          >
             <div class="flex items-start justify-between gap-3">
               <div>
                 <h3 class="font-mono text-sm font-bold" style="color: var(--text-primary);">{p.title}</h3>
@@ -63,31 +155,40 @@ const passions = [
 
             <div class="w-8 h-px" style={`background: ${p.color};`}></div>
 
-            {p.id === 'cyberpunk' && (
-              <img src="/Cyberpunk.gif" alt="Cyberpunk" class="w-full rounded object-cover" style="max-height: 180px;" />
-            )}
-            {p.id === 'fallout' && (
-              <img src="/fallout.webp" alt="Fallout" class="w-full rounded object-cover" style="max-height: 180px;" />
-            )}
-            {p.id === 'simulation' && (
-              <img src="/DCS.png" alt="DCS" class="w-full rounded object-cover" style="max-height: 180px;" />
-            )}
-            {p.id === 'strategy' && (
-              <img src="/stellaris.jpg" alt="Stellaris" class="w-full rounded object-cover" style="max-height: 180px;" />
+            {p.image && (
+              <img src={p.image} alt={p.title} class="w-full rounded object-cover" style="max-height: 180px;" />
             )}
             <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">{p.body}</p>
 
             {p.pipboy && (
               <p class="font-mono text-[10px] mt-1">
                 <span style="color: #4ADE80;">▸</span>{' '}
-                <button data-page="projects" class="font-mono text-[10px]" style="color: var(--accent-teal); text-decoration: underline; background: none; border: none; cursor: pointer; padding: 0;">
+                <button data-page="projects" class="font-mono text-[10px]" style="color: var(--accent-teal); text-decoration: underline; background: none; border: none; cursor: pointer; padding: 0;"
+                  class="pipboy-link">
                   Voir le projet Pip-Boy →
                 </button>
               </p>
             )}
+
+            <p class="font-mono text-[9px] mt-auto pt-1" style="color: var(--text-muted);">Cliquer pour en savoir plus →</p>
           </BentoCard>
         ))}
       </div>
     </AnimationWrapper>
   </div>
 </section>
+
+<CardModal />
+
+<script>
+  document.querySelectorAll<HTMLElement>('.pipboy-link').forEach(btn => {
+    btn.addEventListener('click', (e) => e.stopPropagation());
+  });
+
+  document.querySelectorAll<HTMLElement>('.passion-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const data = JSON.parse(card.dataset.modal!);
+      (window as any).openCardModal(data);
+    });
+  });
+</script>

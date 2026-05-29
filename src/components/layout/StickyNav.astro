@@ -14,31 +14,73 @@ const navItems = [
 
 <nav
   id="sticky-nav"
-  class="fixed top-4 left-4 z-50 flex items-center gap-1 px-3 py-2 rounded-lg"
+  class="fixed top-4 left-4 z-50 rounded-lg"
   style="background: var(--nav-bg); backdrop-filter: blur(12px); border: 1px solid var(--border);"
   aria-label="Navigation rapide"
 >
-  <button data-page="hero" class="font-mono text-[11px] px-3 py-1 rounded" style="color: var(--accent-teal); background: none; border: none; cursor: pointer;" title="Accueil">~/</button>
-  <div class="w-px h-4" style="background: var(--border);"></div>
+  <!-- Desktop : barre horizontale -->
+  <div class="hidden sm:flex items-center gap-1 px-3 py-2">
+    <button data-page="hero" class="font-mono text-[11px] px-3 py-1 rounded" style="color: var(--accent-teal); background: none; border: none; cursor: pointer;" title="Accueil">~/</button>
+    <div class="w-px h-4" style="background: var(--border);"></div>
 
-  {navItems.map((item) => (
+    {navItems.map((item) => (
+      <button
+        data-page={item.id}
+        class="font-mono text-[11px] px-3 py-1 rounded"
+        style="color: var(--text-muted); background: none; border: none; cursor: pointer;"
+        data-sticky-link
+      >
+        {item.label}
+      </button>
+    ))}
+
+    <div class="w-px h-4 mx-1" style="background: var(--border);"></div>
+    <ThemeToggle />
+  </div>
+
+  <!-- Mobile : header avec ~/  + burger + theme -->
+  <div class="flex sm:hidden items-center gap-2 px-3 py-2">
+    <button data-page="hero" class="font-mono text-[11px] px-2 py-1 rounded" style="color: var(--accent-teal); background: none; border: none; cursor: pointer;">~/</button>
+    <div class="flex-1"></div>
+    <ThemeToggle />
     <button
-      data-page={item.id}
-      class="font-mono text-[11px] px-3 py-1 rounded"
-      style="color: var(--text-muted); background: none; border: none; cursor: pointer;"
-      data-sticky-link
+      id="burger-btn"
+      aria-label="Menu"
+      class="flex flex-col justify-center items-center w-8 h-8 gap-1 rounded"
+      style="background: none; border: none; cursor: pointer;"
     >
-      {item.label}
+      <span class="burger-bar block w-5 h-px transition-all duration-200" style="background: var(--accent-teal);"></span>
+      <span class="burger-bar block w-5 h-px transition-all duration-200" style="background: var(--accent-teal);"></span>
+      <span class="burger-bar block w-5 h-px transition-all duration-200" style="background: var(--accent-teal);"></span>
     </button>
-  ))}
+  </div>
 
-  <div class="w-px h-4 mx-1" style="background: var(--border);"></div>
-  <ThemeToggle />
+  <!-- Mobile : menu déroulant -->
+  <div
+    id="mobile-menu"
+    class="sm:hidden flex flex-col overflow-hidden transition-all duration-200"
+    style="max-height: 0;"
+  >
+    <div class="flex flex-col pb-2 px-2" style="border-top: 1px solid var(--border);">
+      {navItems.map((item) => (
+        <button
+          data-page={item.id}
+          class="font-mono text-[12px] px-3 py-2 rounded text-left"
+          style="color: var(--text-muted); background: none; border: none; cursor: pointer;"
+          data-sticky-link
+          data-mobile-link
+        >
+          {item.label}
+        </button>
+      ))}
+    </div>
+  </div>
 </nav>
 
 <script>
   const links = document.querySelectorAll('[data-sticky-link]');
 
+  // Active link highlight
   document.addEventListener('pagechange', (e) => {
     const id = (e as CustomEvent<{ id: string }>).detail.id;
     links.forEach((link) => {
@@ -46,5 +88,27 @@ const navItems = [
       (link as HTMLElement).style.color      = isActive ? 'var(--accent-teal)' : 'var(--text-muted)';
       (link as HTMLElement).style.background = isActive ? 'var(--bg-surface-2)' : 'transparent';
     });
+  });
+
+  // Burger toggle
+  const burgerBtn  = document.getElementById('burger-btn')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const bars       = burgerBtn.querySelectorAll<HTMLElement>('.burger-bar');
+  let open = false;
+
+  function toggleMenu(force?: boolean) {
+    open = force !== undefined ? force : !open;
+    mobileMenu.style.maxHeight = open ? `${mobileMenu.scrollHeight + 200}px` : '0';
+    // Animate bars into X
+    bars[0].style.transform = open ? 'translateY(6px) rotate(45deg)'  : '';
+    bars[1].style.opacity   = open ? '0' : '1';
+    bars[2].style.transform = open ? 'translateY(-6px) rotate(-45deg)' : '';
+  }
+
+  burgerBtn.addEventListener('click', () => toggleMenu());
+
+  // Close menu on link click
+  document.querySelectorAll('[data-mobile-link]').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
   });
 </script>
