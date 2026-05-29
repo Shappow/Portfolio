@@ -3,7 +3,8 @@ import BentoCard from '../ui/BentoCard.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import AnimationWrapper from '../ui/AnimationWrapper.astro';
 import CardModal from '../ui/CardModal.astro';
-import { asset } from '../../utils/asset';
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+const asset = (p: string) => p ? BASE + (p.startsWith('/') ? p : '/' + p) : '';
 
 const passions = [
   {
