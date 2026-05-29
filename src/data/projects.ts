@@ -1,6 +1,10 @@
 export interface ProjectSection {
   title: string;
-  body: string;
+  body?: string;
+  items?: string[];
+  teams?: { name: string; role: string }[];
+  image?: string;
+  docs?: { label: string; href: string }[];
 }
 
 export interface ProjectDetails {
@@ -77,15 +81,33 @@ export const projects: Project[] = [
       sections: [
         {
           title: 'répartition_équipe',
-          body: 'Équipe Mécanique : En charge de l\'intégralité de la structure, du design à la modélisation 3D, en passant par la fabrication (impression 3D et découpe laser) et l\'assemblage du châssis.\n\nÉquipe Informatique (Mon rôle) : Responsable de l\'intelligence du robot, incluant le contrôle des servomoteurs Dynamixel, le traitement des données du LiDAR, le pilotage global et la création de l\'algorithme de sortie du labyrinthe.',
+          teams: [
+            {
+              name: 'Équipe Mécanique',
+              role: 'En charge de l\'intégralité de la structure : du design à la modélisation 3D, en passant par la fabrication (impression 3D et découpe laser) et l\'assemblage du châssis.',
+            },
+            {
+              name: 'Équipe Informatique — Mon rôle',
+              role: 'Responsable de l\'intelligence du robot : contrôle des servomoteurs Dynamixel, traitement des données du LiDAR, pilotage global et création de l\'algorithme de sortie du labyrinthe.',
+            },
+          ],
         },
         {
           title: 'matériel_et_technologies',
-          body: 'L\'architecture matérielle s\'articule autour d\'une Raspberry Pi servant d\'unité centrale, couplée à un capteur LiDAR pour l\'analyse de l\'environnement. La mobilité autonome est assurée par des roues Mecanum alimentées par une batterie LiPo. Le prototypage a été réalisé grâce aux équipements du fablab (imprimante 3D et découpeuse laser).',
+          items: [
+            'Raspberry Pi — unité centrale de traitement',
+            'Capteur LiDAR — analyse de l\'environnement et cartographie des murs',
+            'Roues Mecanum — mobilité omnidirectionnelle dans les espaces exigus',
+            'Batterie LiPo — alimentation embarquée autonome',
+            'Fablab IUT — imprimante 3D et découpeuse laser pour le prototypage',
+          ],
         },
         {
           title: 'conception_mécanique',
-          body: 'Le défi majeur était d\'évoluer de manière fluide dans un environnement très exigu (les couloirs du labyrinthe mesurant seulement 30 cm de large). Le mouvement omnidirectionnel s\'est naturellement imposé. Pour minimiser l\'encombrement tout en respectant les délais, le châssis a été inspiré de la plateforme open-source Pico Mars Rover. Nous avons également privilégié la conception de pièces pour la découpe laser, offrant un gain de temps d\'usinage considérable face à l\'impression 3D classique.',
+          body: 'Le défi majeur était d\'évoluer de manière fluide dans un environnement très exigu (les couloirs du labyrinthe mesurant seulement 30 cm de large). Le mouvement omnidirectionnel s\'est naturellement imposé. Pour minimiser l\'encombrement tout en respectant les délais, le châssis a été inspiré de la plateforme open-source Pico Mars Rover.',
+          items: [
+            'Pièces conçues prioritairement pour la découpe laser : gain de temps d\'usinage considérable face à l\'impression 3D classique',
+          ],
         },
         {
           title: 'conception_informatique',
@@ -195,29 +217,52 @@ export const projects: Project[] = [
     featured: false,
     image: '/Antenne.jpg',
     details: {
-      context: 'Projet réalisé pour l\'ARGG (Association Radio Goniométrie Gironde) dans le cadre d\'un challenge de radiogoniométrie sur le campus. L\'objectif est de localiser des balises radio cachées.',
-      objectives: [
-        'Concevoir une antenne HB9CV directionnelle pour 144 MHz',
-        'Obtenir une impédance de 50 Ω pour une adaptation optimale',
-        'Réaliser un diagramme de rayonnement directionnel pour la goniométrie',
-        'Développer un outil logiciel d\'aide à la localisation des balises',
-      ],
-      technical: [
-        'Antenne type HB9CV (2 éléments : radiateur + réflecteur sur boom)',
-        'Fréquence centrale : 144 MHz (bande amateur 2m)',
-        'Adaptation d\'impédance par condensateur série (8,7 pF)',
-        'Simulation RF avec MMANA-GALBasic et uSimmick',
-        'Mesure avec analyseur réseau vectoriel (VNA) pour validation',
-        'RTL-SDR pour réception et vérification du signal',
-        'Interface Gradio développée en Python pour l\'aide à la goniométrie',
-        'Précision directionnelle mesurée : 3 directives à 5°',
-      ],
-      results: [
-        'Antenne résonant précisément à 144 MHz (conforme CDC)',
-        'Adaptation d\'impédance à 50 Ω validée sur analyseur réseau',
-        'Diagramme de rayonnement directionnel confirmé',
-        'Vérifications mécaniques conformes (masse, rigidité, équilibre)',
-        'Interface logicielle opérationnelle pour l\'équipe terrain',
+      context: 'Réalisé dans le cadre des SAE (Situations d\'Apprentissage et d\'Évaluation) du quatrième semestre, ce projet consistait à concevoir et fabriquer une antenne fonctionnelle dans le strict respect d\'un cahier des charges. Au-delà de la réalisation technique matérielle, le défi incluait la production complète de la documentation associée (conception, fabrication et validation). L\'aboutissement de ce travail s\'est concrétisé par une mise en pratique sur le terrain : la participation à une chasse aux balises dispersées sur l\'ensemble du campus universitaire.',
+      sections: [
+        {
+          title: 'organisation_du_projet',
+          body: 'Plus condensé que nos autres projets de SAE, celui-ci a été mené en binôme dans un délai restreint. Pour nous organiser, nous avons suivi un planning de projet rigoureux. Pour garantir la rigueur de notre démarche, nous avons opté pour une méthodologie en cycle en V : une phase de conception (préliminaire et détaillée), une phase de fabrication, et une phase de tests et d\'ajustements, chaque jalon étant validé par une documentation spécifique.\n\nNotre travail devait répondre à un cahier des charges strict : plage de fréquence de 144 MHz (± 2 MHz), budget maximum de 50 € HT, et utilisation exclusive de l\'architecture d\'antenne HB9CV.',
+          image: '/cycle en V Antenne.png',
+          docs: [
+            { label: 'Planning de Projet (PDP)', href: '/Antenne PDP v1-2.xlsx' },
+            { label: 'Cahier des Charges (CDC)', href: '/Antenne CDC v1-4.pdf' },
+          ],
+        },
+        {
+          title: 'phase_de_conception',
+          body: 'Conception préliminaire : cette étape a été consacrée à la recherche de solutions techniques viables respectant notre cahier des charges. Nous avons procédé à une analyse comparative des différents matériaux envisageables en évaluant plusieurs critères clés :',
+          items: [
+            'La conductivité électrique',
+            'Les propriétés mécaniques (flexibilité, mémoire de forme)',
+            'L\'impact sur le coût global pour respecter notre budget',
+          ],
+          docs: [
+            { label: 'Dossier de Conception (DDC)', href: '/Antenne DDC v1-4.pdf' },
+          ],
+        },
+        {
+          title: 'phase_de_conception_détaillée',
+          body: 'Lors de cette phase, nous avons réalisé l\'ensemble du dimensionnement de l\'antenne en nous appuyant sur des outils de modélisation :',
+          items: [
+            'Utilisation du logiciel MMANA-GAL pour calculer précisément la longueur des brins et optimiser la réception sur la fréquence cible',
+            'Dimensionnement des composants passifs pour garantir une parfaite adaptation d\'impédance à 50 Ω',
+          ],
+        },
+        {
+          title: 'phase_de_fabrication',
+          body: 'Afin de garantir un taux de réussite élevé, les matériaux et la forme globale de l\'antenne ont été standardisés pour tous les binômes. En revanche, les dimensions exactes dépendaient de nos calculs théoriques. Nous avons procédé à l\'assemblage et au montage en suivant rigoureusement les instructions dictées par nos propres documents de conception.',
+        },
+        {
+          title: 'phase_de_vérification',
+          body: 'Cette étape s\'est révélée être la plus cruciale du projet, la théorie se heurtant inévitablement aux contraintes physiques. Nous avons mené une série de tests rigoureux pour valider le bon fonctionnement de l\'antenne sur le terrain et l\'ajuster. C\'est également durant cette phase que nous avons programmé l\'application sur tablette chargée d\'interpréter les signaux captés par notre antenne.',
+          docs: [
+            { label: 'Dossier de Validation (DDV)', href: '/Antenne DDV v1-4.pdf' },
+          ],
+        },
+        {
+          title: 'résultat_final',
+          body: 'Le projet s\'est conclu de manière très positive. Malgré quelques défis techniques inhérents au travail sur le terrain, nous avons participé à la chasse aux balises et réussi à en détecter plusieurs à travers le campus. Au-delà de l\'exercice, cette expérience m\'a apporté de solides connaissances pratiques et théoriques dans le domaine de la radiofréquence et de la conception d\'antennes.',
+        },
       ],
       docs: [
         { label: 'Cahier des Charges (CDC)', href: '/Antenne CDC v1-4.pdf' },

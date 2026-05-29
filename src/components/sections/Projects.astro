@@ -15,6 +15,11 @@ function prefixDetails(details: any) {
     ...details,
     docs:  details.docs?.map((d: any) => ({ ...d, href: asset(d.href) })),
     links: details.links,
+    sections: details.sections?.map((s: any) => ({
+      ...s,
+      image: s.image ? asset(s.image) : undefined,
+      docs:  s.docs?.map((d: any) => ({ ...d, href: asset(d.href) })),
+    })),
   };
 }
 

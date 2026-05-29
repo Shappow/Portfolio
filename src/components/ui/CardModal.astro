@@ -203,15 +203,51 @@
       const colors = ['#A78BFA', '#38BDF8', '#F59E0B', 'var(--accent-teal)', '#4ADE80', '#F472B6'];
       sectionsCont.innerHTML = d.sections.map((s: any, i: number) => {
         const color = colors[i % colors.length];
-        const paragraphs = s.body.split('\n\n').map((p: string) =>
-          `<p style="font-size:0.75rem; line-height:1.65; color:var(--text-secondary); margin:0;">${p.trim()}</p>`
-        ).join('');
+        let inner = '';
+
+        // Mini-cartes équipes
+        if (s.teams?.length) {
+          inner = `<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+            ${s.teams.map((t: any) => `
+              <div style="padding:0.65rem; border-radius:6px; border:1px solid ${color}40; background:${color}08;">
+                <p style="font-family:monospace; font-size:0.65rem; font-weight:700; color:${color}; margin:0 0 0.3rem;">${t.name}</p>
+                <p style="font-size:0.72rem; line-height:1.5; color:var(--text-secondary); margin:0;">${t.role}</p>
+              </div>`).join('')}
+          </div>`;
+        } else {
+          // Paragraphe
+          if (s.body) {
+            inner += `<p style="font-size:0.75rem; line-height:1.65; color:var(--text-secondary); margin:0 0 ${s.items?.length ? '0.5rem' : '0'};">${s.body}</p>`;
+          }
+          // Liste à puces
+          if (s.items?.length) {
+            inner += `<ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.3rem;">
+              ${s.items.map((item: string) => `
+                <li style="display:flex; gap:0.4rem; font-size:0.75rem; color:var(--text-secondary);">
+                  <span style="color:${color}; flex-shrink:0;">▸</span><span>${item}</span>
+                </li>`).join('')}
+            </ul>`;
+          }
+        }
+
+        // Image de section
+        let sectionImage = '';
+        if (s.image) {
+          sectionImage = `<img src="${s.image}" alt="${s.title}" style="width:100%; border-radius:6px; margin-top:0.5rem; max-height:200px; object-fit:contain;" />`;
+        }
+
+        // Docs de section
+        let sectionDocs = '';
+        if (s.docs?.length) {
+          sectionDocs = `<div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.5rem;">
+            ${s.docs.map((d: any) => `<a href="${d.href}" download style="font-family:monospace; font-size:0.65rem; padding:0.2rem 0.6rem; border-radius:4px; border:1px solid ${color}40; color:${color}; text-decoration:none; background:${color}08;">↓ ${d.label}</a>`).join('')}
+          </div>`;
+        }
+
         return `
           <div>
             <p style="font-family:monospace; font-size:0.65rem; color:${color}; margin-bottom:0.35rem;">// ${s.title}</p>
-            <div style="display:flex; flex-direction:column; gap:0.5rem; padding-left:0.75rem; border-left:2px solid ${color}40;">
-              ${paragraphs}
-            </div>
+            <div style="padding-left:0.75rem; border-left:2px solid ${color}40;">${inner}${sectionImage}${sectionDocs}</div>
           </div>`;
       }).join('');
     } else {
