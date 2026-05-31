@@ -17,18 +17,21 @@ function prefixDetails(details: any) {
     links: details.links,
     sections: details.sections?.map((s: any) => ({
       ...s,
-      image: s.image ? asset(s.image) : undefined,
-      docs:  s.docs?.map((d: any) => ({ ...d, href: asset(d.href) })),
+      image:  s.image  ? asset(s.image) : undefined,
+      images: s.images ? s.images.map((i: string) => asset(i)) : undefined,
+      docs:   s.docs?.map((d: any) => ({ ...d, href: asset(d.href) })),
     })),
   };
 }
 
-const proPerso = projects.filter(p => p.type === 'pro' || p.type === 'perso');
-const univ     = projects.filter(p => p.type === 'univ');
+const robotiqueIds = ['proj-01', 'proj-02', 'proj-03'];
+const autresIds    = ['proj-04', 'proj-05', 'proj-06'];
+const robotique = robotiqueIds.map(id => projects.find(p => p.id === id)!).filter(Boolean);
+const autres    = autresIds.map(id => projects.find(p => p.id === id)!).filter(Boolean);
 
 const rows = [
-  { id: 'pro',  label: 'Professionnel & Personnel', dot: 'var(--accent-teal)', items: proPerso },
-  { id: 'univ', label: 'Académique',                dot: '#60A5FA',  items: univ     },
+  { id: 'robotique', label: 'Projets Robotique', dot: 'var(--accent-teal)', items: robotique },
+  { id: 'autres',    label: 'Autres Projets',    dot: '#60A5FA',            items: autres    },
 ];
 ---
 

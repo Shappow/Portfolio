@@ -25,17 +25,11 @@ const soft = skillCategories.filter((c) => c.group === 'soft');
           {hard.map((cat) => (
             <BentoCard>
               <p class="font-mono text-xs mb-4" style={`color: ${cat.color};`}>// {cat.label}</p>
-              <div class="flex flex-col gap-4">
+              <div class="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
-                  <div>
-                    <div class="flex justify-between items-baseline mb-1">
-                      <span class="font-mono text-xs" style="color: var(--text-secondary);">{skill.name}</span>
-                      <span class="font-mono text-[10px]" style="color: var(--text-muted);">{skill.level}%</span>
-                    </div>
-                    <div class="skill-bar-track">
-                      <div class="skill-bar-fill" style={`width: ${skill.level}%;`}></div>
-                    </div>
-                  </div>
+                  <span class="font-mono text-xs px-2.5 py-1 rounded" style={`background: ${cat.color}12; color: ${cat.color}; border: 1px solid ${cat.color}30;`}>
+                    {skill.name}
+                  </span>
                 ))}
               </div>
             </BentoCard>
@@ -51,17 +45,11 @@ const soft = skillCategories.filter((c) => c.group === 'soft');
           {soft.map((cat) => (
             <BentoCard>
               <p class="font-mono text-xs mb-4" style={`color: ${cat.color};`}>// {cat.label}</p>
-              <div class="flex flex-col gap-4">
+              <div class="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
-                  <div>
-                    <div class="flex justify-between items-baseline mb-1">
-                      <span class="font-mono text-xs" style="color: var(--text-secondary);">{skill.name}</span>
-                      <span class="font-mono text-[10px]" style="color: var(--text-muted);">{skill.level}%</span>
-                    </div>
-                    <div class="skill-bar-track">
-                      <div class="skill-bar-fill" style={`width: ${skill.level}%;`}></div>
-                    </div>
-                  </div>
+                  <span class="font-mono text-xs px-2.5 py-1 rounded" style={`background: ${cat.color}12; color: ${cat.color}; border: 1px solid ${cat.color}30;`}>
+                    {skill.name}
+                  </span>
                 ))}
               </div>
             </BentoCard>

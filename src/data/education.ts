@@ -59,6 +59,10 @@ export const diplomas: Diploma[] = [
     school: 'IUT de Bordeaux',
     location: 'Bordeaux, France',
     period: '2021 — 2022',
+    highlights: [
+      'Projets variés sur plusieurs langages : Ruby, Node.js',
+      'Déploiement et conteneurisation avec Docker',
+    ],
   },
   {
     id: 'dip-06',
@@ -66,6 +70,11 @@ export const diplomas: Diploma[] = [
     school: 'IUT de Bordeaux',
     location: 'Bordeaux, France',
     period: '2019 — 2021',
+    highlights: [
+      'Programmation web et logicielle',
+      'Langages principaux : Java et PHP',
+      'Framework Symfony',
+    ],
   },
   {
     id: 'dip-07',

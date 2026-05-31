@@ -15,18 +15,7 @@ const links = [
     <AnimationWrapper>
       <SectionTitle id="contact" label="Contact" comment="send_message()" />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <BentoCard>
-          <p class="font-mono text-xs mb-4" style="color: var(--accent-dim);">// terminal</p>
-          <div class="font-mono text-xs space-y-1" style="color: var(--text-secondary);">
-            <p><span style="color: var(--accent-teal);">$</span> whoami</p>
-            <p style="color: var(--text-muted);">theo_feugnet</p>
-            <p class="mt-2"><span style="color: var(--accent-teal);">$</span> cat available.txt</p>
-            <p style="color: var(--text-muted);">Ouvert aux opportunités en électronique embarquée.</p>
-            <p class="mt-2"><span style="color: var(--accent-teal);">$</span> send_message --to=theo<span class="cursor-blink">_</span></p>
-          </div>
-        </BentoCard>
-
+      <div class="max-w-md mx-auto w-full">
         <BentoCard class="flex flex-col gap-3">
           <p class="font-mono text-xs mb-1" style="color: var(--accent-dim);">// links[]</p>
           {links.map((link) => (

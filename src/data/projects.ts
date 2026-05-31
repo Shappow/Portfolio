@@ -4,6 +4,8 @@ export interface ProjectSection {
   items?: string[];
   teams?: { name: string; role: string }[];
   image?: string;
+  images?: string[];
+  imageCaptions?: string[];
   docs?: { label: string; href: string }[];
 }
 
@@ -33,42 +35,45 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'proj-01',
+    id: 'proj-04',
     title: 'Réplique du Pip-Boy de Fallout',
     type: 'perso',
     description:
       'Conception d\'un système embarqué sur Raspberry Pi 5 intégrant électronique, interface Python et composants matériels (écran, radio, audio, potentiomètres) pour un prototype fonctionnel.',
-    stack: ['Raspberry Pi 5', 'Python', 'Électronique', 'PCB'],
+    stack: ['Raspberry Pi 5', 'Python', 'Électronique', 'PCB', 'Modélisation 3D', 'Impression 3D'],
     status: 'wip',
     featured: true,
     image: '/pip_boy.jpg',
     details: {
-      context: 'Projet personnel inspiré de la saga Fallout de Bethesda. Le Pip-Boy est un terminal portatif emblématique porté au poignet par le joueur dans le jeu.',
-      objectives: [
-        'Reproduire fidèlement le Pip-Boy 3000 Mark IV de Fallout 4',
-        'Intégrer un écran circulaire fonctionnel avec interface Python',
-        'Ajouter des fonctionnalités réelles : radio FM, lecteur audio, horloge',
-        'Concevoir un boîtier imprimé en 3D adapté au poignet',
-      ],
-      technical: [
-        'Raspberry Pi 5 comme unité centrale de traitement',
-        'Écran rond 240×240px piloté via SPI',
-        'Module radio FM pour réception de stations réelles',
-        'Amplificateur audio et haut-parleur intégrés',
-        'Potentiomètres rotatifs pour navigation dans les menus',
-        'Interface graphique développée en Python (Pygame)',
-        'Alimentation par batterie LiPo rechargeable',
-      ],
-      results: [
-        'Prototype fonctionnel avec affichage d\'interface rétro',
-        'Navigation entre menus (STATS, INV, DATA, MAP, RADIO)',
-        'Projet en cours de finalisation (boîtier + finitions)',
+      context: 'Ce projet personnel, actuellement au stade de prototype, est toujours en cours de développement. Mon objectif est de concevoir une réplique fonctionnelle du célèbre Pip-Boy — l\'emblématique terminal de poignet issu de la licence Fallout (Bethesda Softworks) — pilotée par une Raspberry Pi. L\'ambition est de développer une interface graphique fidèle à l\'originale et d\'y intégrer un véritable module de réception radio. Pour renforcer l\'immersion, la navigation à travers les menus s\'effectue via des commandes physiques volontairement rétro, à l\'aide de boutons et de potentiomètres.',
+      sections: [
+        {
+          title: 'objectifs_et_motivations',
+          body: 'Au-delà du défi amusant de recréer l\'un de mes objets de jeu vidéo favoris, ce projet constitue un excellent terrain de jeu pour consolider mes compétences de manière transversale, que ce soit en électronique, en modélisation 3D ou en programmation.',
+          items: [
+            'Interface graphique fidèle à l\'originale du Pip-Boy',
+            'Réception radio réelle via un module RTL-SDR',
+            'Navigation physique rétro — boutons et potentiomètres',
+            'Enveloppe extérieure modélisée et imprimée en 3D',
+          ],
+        },
+        {
+          title: 'technologies_utilisées',
+          items: [
+            'Raspberry Pi 5 — cœur du prototype, unité centrale de traitement',
+            'Petit écran dédié — affichage de l\'interface graphique',
+            'Potentiomètres et boutons — interactions physiques rétro',
+            'Module radio RTL-SDR — captation de véritables fréquences radio',
+            'Carte de gestion audio + haut-parleurs — immersion sonore',
+            'Modélisation et impression 3D — enveloppe extérieure et structure',
+          ],
+        },
       ],
     },
   },
   {
     id: 'proj-02',
-    title: 'Robot autonome — Exploration de labyrinthe',
+    title: 'Robot autonome Thésée — Exploration de labyrinthe',
     type: 'univ',
     description:
       'Conception globale (mécanique, électronique, logiciel) d\'un robot holonome. Navigation et évitement d\'obstacles sur Raspberry Pi via un capteur LIDAR. L\'objectif du robot est qu\'il soit capable de sortir par lui-même d\'un labyrinthe.',
@@ -115,7 +120,12 @@ export const projects: Project[] = [
         },
         {
           title: 'bilan_et_résultats',
-          body: 'Bien qu\'ambitieux, le projet s\'est heurté à des contraintes de temps. Les délais de fabrication ayant été sous-estimés, l\'équipe mécanique n\'a pu livrer le châssis assez tôt pour permettre à l\'équipe informatique de finaliser les tests d\'intégration en conditions réelles. Néanmoins, cette expérience s\'est révélée extrêmement formatrice. Elle nous a permis de maîtriser des technologies totalement nouvelles pour nous (LiDAR, cinématique Mecanum), tout en nous offrant une véritable leçon sur l\'importance cruciale de la gestion du temps et de la synchronisation entre les équipes.',
+          body: 'Bien qu\'ambitieux, le projet s\'est heurté à des contraintes de temps. Les délais de fabrication ayant été sous-estimés, l\'équipe mécanique n\'a pu livrer le châssis assez tôt pour permettre à l\'équipe informatique de finaliser les tests d\'intégration en conditions réelles. L\'équipe informatique a également rencontré des problèmes de surchauffe sur la Raspberry Pi, provoquant des redémarrages intempestifs qui ont ralenti le développement. Néanmoins, cette expérience s\'est révélée extrêmement formatrice.',
+          items: [
+            'Maîtrise de technologies nouvelles : LiDAR et cinématique des roues Mecanum',
+            'Leçon sur la gestion du temps et la synchronisation entre équipes pluridisciplinaires',
+            'Problème de surchauffe Raspberry Pi identifié — piste d\'amélioration pour un futur prototype',
+          ],
         },
       ],
       docs: [
@@ -134,29 +144,52 @@ export const projects: Project[] = [
     featured: false,
     image: '/Robot Sumo.png',
     details: {
-      context: 'Projet académique conforme aux règles TNRS (Tournoi National de Robotique Sumo). Le robot doit détecter et pousser son adversaire hors d\'un ring circulaire noir à liseré blanc.',
-      objectives: [
-        'Concevoir un robot mini-sumo dans les dimensions 100×100 mm max',
-        'Détecter l\'adversaire et le bord du ring de manière autonome',
-        'Implémenter des stratégies de combat efficaces',
-        'Concevoir un shield PCB sur mesure intégrant tous les composants',
-      ],
-      technical: [
-        'Microcontrôleur ATMEGA328P (compatible Arduino)',
-        'Capteurs IR frontaux pour détection adversaire',
-        'Capteurs de réflectance pour détection du bord blanc du ring',
-        'Pont en H L298N pour le contrôle des deux moteurs DC',
-        'PCB shield custom conçu sur KiCad et fabriqué',
-        'Alimentation LiPo 7.4V avec régulateur 5V',
-        'Programmation en C/C++ avec Arduino IDE',
-        'Dimensions finales validées : 99.88 × 99.99 mm',
-      ],
-      results: [
-        'PCB shield fonctionnel fabriqué et soudé',
-        'Dimensions conformes au cahier des charges TNRS (< 100mm)',
-        'Détection adversaire et bord du ring opérationnels',
-        'Stratégies de combat autonomes implémentées et testées',
-        'Autonomie énergétique validée pour la durée d\'un match',
+      context: 'Réalisé dans le cadre des SAE (Situations d\'Apprentissage et d\'Évaluation) du troisième semestre, ce projet consistait à concevoir et fabriquer un robot sumo qui doit par lui-même détecter son adversaire et le pousser hors d\'un ring circulaire noir à liseré blanc, tout en respectant le cahier des charges fourni. Au-delà de la réalisation technique, le défi incluait la production complète de la documentation associée (conception, fabrication et validation). Pour ce projet, nous avons réalisé un shield pour une carte électronique Arduino.',
+      sections: [
+        {
+          title: 'organisation_du_projet',
+          body: 'Ce projet a été mené au sein d\'une équipe de cinq personnes. Afin d\'optimiser notre efficacité, le travail a été divisé en quatre pôles d\'expertise : Énergie, Traitement, Action et Acquisition. J\'ai personnellement pris en charge le pôle Énergie (gestion de l\'alimentation du robot) ainsi que la partie Traitement (gestion des mouvements et traitement des données issues des capteurs).\n\nNous avons adopté une démarche en cycle en V : phase de conception (préliminaire et détaillée), phase de fabrication, puis phase de tests et d\'ajustements. Notre robot devait respecter des dimensions réglementaires maximales, une gestion précise de la sensibilité lumineuse, et des comportements autonomes spécifiques (ne pas sortir du ring par lui-même, foncer vers son adversaire).',
+          image: '/Archi fonctionnelle.png',
+          docs: [
+            { label: 'Cahier des Charges (CDC)', href: '/Robot Sumo_CDC.pdf' },
+          ],
+        },
+        {
+          title: 'phase_de_conception_préliminaire',
+          body: 'Cette première étape a été consacrée à la sélection des composants électroniques capables de répondre aux exigences du cahier des charges, ainsi qu\'à la préparation de l\'architecture logicielle de base.',
+        },
+        {
+          title: 'phase_de_conception_détaillée',
+          body: 'Le travail s\'est spécialisé selon les différents pôles :',
+          items: [
+            'Pôle Action : dimensionnement du pont en H pour la motorisation, développement des fonctions de contrôle, schéma électrique sous KiCad',
+            'Pôle Acquisition : intégration et calibration des capteurs, création du schéma électrique dédié sous KiCad',
+            'Pôle Énergie et Traitement (Mon rôle) : conception du système de séparation de l\'alimentation entre la partie puissance (moteurs) et la logique (Arduino Uno)',
+          ],
+          docs: [
+            { label: 'Dossier de Conception (DDC)', href: '/Robot Sumo_DDC_EQ22.pdf' },
+          ],
+        },
+        {
+          title: 'centralisation_et_routage',
+          body: 'À l\'issue de la répartition technique, j\'ai personnellement centralisé l\'ensemble des travaux en fusionnant les différents modules réalisés par mes coéquipiers avec les miens. J\'ai ainsi conçu le schéma électrique global et réalisé le routage complet de la carte. Chaque pôle a ensuite mené une série de tests théoriques pour valider la conformité de ses sous-systèmes.',
+          images: ['/Schema Robot Sumo.png', '/Robot sumo 3D.png'],
+        },
+        {
+          title: 'phase_de_fabrication',
+          body: 'Durant cette phase, nous avons commencé par rédiger un dossier de fabrication complet. En nous appuyant sur les plans et le routage produits lors de la conception, nous avons suivi un protocole rigoureux pour fabriquer et assembler notre propre carte électronique, en utilisant des composants montés en surface (CMS / SMD).',
+        },
+        {
+          title: 'phase_de_vérification',
+          body: 'Cette étape cruciale nous a permis de confronter notre prototype aux exigences attendues. Nous avons vérifié l\'autonomie du robot par des mesures de consommation de courant, éprouvé sa logique de comportement en plaçant des obstacles face à lui, et testé la fiabilité de ses capteurs de ligne via des tests de luminosité (en saturant le sol de lumière avec des lampes torches pour simuler des conditions extrêmes).',
+          docs: [
+            { label: 'Dossier de Validation (DDV)', href: '/Robot Sumo_DDV.pdf' },
+          ],
+        },
+        {
+          title: 'résultat_final',
+          body: 'Le projet s\'est conclu sur un bilan en demi-teinte. Bien que la majorité des fonctionnalités électroniques et logicielles aient été opérationnelles, le robot peinait parfois à détecter son adversaire et rencontrait des difficultés à rester dans les limites du ring. Un dépassement des dimensions réglementaires maximales a malheureusement entraîné sa disqualification pour la compétition officielle. Malgré cela, les compétences acquises en conception de cartes électroniques, en routage et en travail d\'équipe restent une véritable réussite.',
+        },
       ],
       docs: [
         { label: 'Cahier des Charges (CDC)', href: '/Robot Sumo_CDC.pdf' },
@@ -176,27 +209,45 @@ export const projects: Project[] = [
     featured: true,
     image: '/HAMSTER.png',
     details: {
-      context: 'Stage R&D au Tanaka Lab (Japon). HAMSTER est un framework de machine learning hiérarchique pour la manipulation robotique utilisant des données off-domain (vidéos libres, simulations).',
+      context: 'Stage R&D au Tanaka Lab (Japon). HAMSTER est un framework de machine learning hiérarchique pour la manipulation robotique utilisant des données off-domain (vidéos libres, simulations). À partir d\'une image et d\'une requête textuelle, le modèle trace une trajectoire à adopter pour réaliser l\'action demandée, servant de représentation intermédiaire pour guider le bras robotique.',
       objectives: [
-        'Implémenter et déployer le modèle HAMSTER (VLM hiérarchique)',
-        'Développer une interface utilisateur pour faciliter l\'utilisation du modèle',
-        'Déployer le modèle sur des services GPU cloud spécialisés (RunPod)',
-        'Améliorer la généralisation des robots en utilisant des données non-robot',
+        'Utiliser la trajectoire générée par HAMSTER pour faciliter la reconnaissance d\'image de l\'IA contrôlant le bras robotique',
+        'Réduire le temps de traitement des images : plus l\'image est complexe, plus le temps de réponse augmente — problème critique en robotique où la latence est primordiale',
+        'Déployer le modèle sur des infrastructures adaptées à ses besoins en ressources',
+        'Développer des outils facilitant l\'utilisation du modèle pour l\'équipe de recherche',
       ],
-      technical: [
-        'Architecture hiérarchique à 2 niveaux : VLM haut-niveau + politique 3D bas-niveau',
-        'Vision-Language Model (LLaVA-1.5-13B) fine-tuné pour la robotique',
-        'Prédiction de trajectoires 2D comme représentation intermédiaire robuste',
-        'Interface web développée avec Gradio pour l\'utilisation du modèle',
-        'Déploiement GPU sur RunPod pour l\'inférence à la demande',
-        'Imitation Learning + données off-domain (vidéos, simulations, croquis)',
-        'Validation sur robot réel WidowX 250',
+      sections: [
+        {
+          title: 'contraintes_techniques',
+          body: 'HAMSTER repose sur un VLM (LLaVA-1.5-13B) comptant environ 13 milliards de paramètres. Ce volume rend l\'inférence impossible sur la majorité des machines classiques et impose des solutions d\'infrastructure dédiées.',
+        },
+        {
+          title: 'solutions_d\'infrastructure',
+          teams: [
+            {
+              name: 'DGX Spark (laboratoire)',
+              role: 'Station de calcul IA personnelle NVIDIA, largement capable de faire tourner HAMSTER. Disponible uniquement sur site et parfois réservée pour l\'entraînement d\'autres modèles.',
+            },
+            {
+              name: 'RunPod (cloud)',
+              role: 'Location de serveurs GPU spécialisés IA, accessibles depuis n\'importe où. Solution retenue pour les sessions hors laboratoire, malgré un coût d\'utilisation et des dépendances à réinstaller lors des changements de pod.',
+            },
+          ],
+        },
+        {
+          title: 'mon_travail',
+          body: 'J\'ai développé un script forkant le projet HAMSTER pour automatiser l\'intégralité de la configuration sous RunPod. Ce travail a nécessité de nombreux tests et corrections, de nombreuses librairies ne s\'installant pas correctement dans cet environnement.',
+          items: [
+            'Fork du projet HAMSTER avec script de configuration automatique pour RunPod',
+            'Identification et correction des conflits de dépendances librairies',
+            'Rédaction d\'un dépôt GitHub documentant la procédure d\'installation pas à pas',
+          ],
+        },
       ],
       results: [
-        'Amélioration de 20% du taux de succès sur 7 axes de généralisation',
-        'Gain relatif de 50% par rapport à OpenVLA (baseline monolithique)',
-        'Généralisation validée sim-to-real et sur nouvelles scènes visuelles',
-        'Interface de déploiement opérationnelle pour l\'équipe de recherche',
+        'Déploiement de HAMSTER sur RunPod fonctionnel et stable',
+        'Script d\'installation automatisé : configuration complète en une seule commande',
+        'Dépôt GitHub documenté, réutilisable par l\'ensemble de l\'équipe de recherche',
       ],
       docs: [
         { label: 'Paper HAMSTER (PDF)', href: '/HAMSTER paper.pdf' },
@@ -207,7 +258,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 'proj-07',
+    id: 'proj-06',
     title: 'Antenne radio pour la localisation de balises — Radiogoniométrie',
     type: 'univ',
     description:
@@ -272,7 +323,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 'proj-06',
+    id: 'proj-01',
     title: 'Bras robotique pour la téléopération',
     type: 'pro',
     description:
@@ -282,69 +333,58 @@ export const projects: Project[] = [
     featured: true,
     image: '/FACTR Assembly.png',
     details: {
-      context: 'Stage R&D au Tanaka Lab (Japon). Le bras pilote est une interface de contrôle ergonomique permettant à un opérateur de téléopérer un bras WidowX AI tout en restant hors du champ de la caméra.',
-      objectives: [
-        'Modéliser un bras robotique maître ergonomique sur Onshape',
-        'Imprimer et assembler le bras en 3D avec les servomoteurs Dynamixel',
-        'Développer le code de téléopération en Python (lecture + envoi positions)',
-        'Permettre l\'acquisition de données haute-fidélité pour l\'Imitation Learning',
-        'Supprimer l\'apparition des bras de l\'opérateur dans le champ de la caméra',
-      ],
-      technical: [
-        'Modélisation 3D complète sur Onshape (assemblage + pièces customs)',
-        'Servomoteurs Dynamixel XH430 pour retour de position précis',
-        'Impression 3D FDM des pièces sur mesure (PLA/PETG)',
-        'Python pour la communication avec les servos via SDK Dynamixel',
-        'Protocole FACTR (Follower Arm Control for Teleoperation Research)',
-        'Bras esclave : WidowX 250 AI de Trossen Robotics',
-        'ROS2 pour la communication inter-processus',
-      ],
-      results: [
-        'Modèle 3D complet du bras maître validé (assemblage FACTR)',
-        'Premières pièces imprimées et testées mécaniquement',
-        'Code de téléopération en développement actif',
-        'Projet en cours — stage avril à juin 2026',
-      ],
-    },
-  },
-  {
-    id: 'proj-04',
-    title: 'Kart à Hélice — Véhicule télécommandé par infrarouge',
-    type: 'univ',
-    description:
-      'Création complète de 2 cartes électroniques émettrice et réceptrice d\'un Kart à Hélice télécommandé par infrarouge. Design de l\'électronique et programmation des cartes.',
-    stack: ['Électronique', 'Arduino', 'PCB Design', 'Infrarouge', 'Proteus'],
-    status: 'stable',
-    featured: false,
-    image: '/Kart a helice.jpg',
-    details: {
-      context: 'Projet académique commandé par Toy Corporation. Conception d\'un kart jouet télécommandé par infrarouge, avec deux cartes électroniques distinctes : un émetteur (télécommande) et un récepteur (embarqué sur le kart).',
-      objectives: [
-        'Concevoir la carte émetteur infrarouge (télécommande)',
-        'Concevoir la carte récepteur embarquée sur le kart',
-        'Mettre en place un protocole de communication IR fiable',
-        'Dimensionner l\'électronique de puissance pour le moteur de l\'hélice',
-      ],
-      technical: [
-        'Microcontrôleur ATmega sur chaque carte (émetteur + récepteur)',
-        'LED IR émettrice 940 nm et photodiode réceptrice',
-        'Protocole IR custom encodé (modulation 38 kHz)',
-        'Simulation du circuit sur Proteus avant fabrication',
-        'PCB double couche conçu et fabriqué pour les deux cartes',
-        'Driver moteur pour contrôle de la vitesse de l\'hélice (PWM)',
-        'Alimentation par pile 9V avec régulation 5V intégrée',
-      ],
-      results: [
-        'Les deux cartes PCB conçues, fabriquées et soudées',
-        'Communication infrarouge émetteur ↔ récepteur validée',
-        'Contrôle de la vitesse de l\'hélice fonctionnel',
-        'Dimensions des cartes conformes au cahier des charges',
-        'Autonomie énergétique testée et validée',
-      ],
-      docs: [
-        { label: 'Cahier des Charges (CDC)', href: '/Kart a helice_CDC.pdf' },
-        { label: 'Dossier de Conception (DDC)', href: '/Kart a helice_DDC.pdf' },
-        { label: 'Dossier de Validation (DDV)', href: '/Kart a helice_DDV.pdf' },
+      context: 'Stage R&D au Tanaka Lab (Japon). Dans le cadre du projet HAMSTER, l\'objectif est d\'implémenter un système d\'apprentissage par imitation (Imitation Learning) sur un bras robotique WidowX AI. Pour résoudre le problème de pollution visuelle lors des enregistrements, on m\'a confié la mise en place d\'un système de téléopération : un bras maître (pilote) à 6 axes contrôle le bras esclave à distance, garantissant des enregistrements vidéo propres, sans présence humaine à l\'image.',
+      sections: [
+        {
+          title: 'base_du_projet',
+          body: 'Pour mener à bien cette mission, je me suis appuyé sur l\'architecture du projet open-source GELLO. Ce framework a été spécifiquement pensé pour simplifier l\'intégration logicielle et matérielle de systèmes de téléopération entre deux bras robotiques. L\'avantage majeur de GELLO réside dans les configurations de bras de référence déjà implémentées, fournissant une excellente base de départ qui a grandement accéléré le lancement du projet.',
+          items: [
+            'Bras maître (pilote) — 6 axes, même cinématique que le bras esclave',
+            'Bras esclave — WidowX AI de Trossen Robotics',
+            'Framework GELLO — architecture logicielle et matérielle de référence',
+          ],
+        },
+        {
+          title: 'défis_à_accomplir',
+          body: 'Bien que GELLO propose plusieurs modèles par défaut, le WidowX AI ne faisait pas partie des robots préconfigurés. Le principal défi a donc consisté à intégrer une architecture matérielle sur-mesure dans l\'écosystème, sur deux fronts simultanés :',
+          items: [
+            'Mécanique — modélisation complète d\'un bras pilote à 6 axes compatible avec la cinématique du WidowX AI',
+            'Logiciel — configuration de la bibliothèque de contrôle GELLO pour assurer la liaison bras pilote ↔ bras suiveur',
+          ],
+        },
+        {
+          title: 'solutions_mécanique_/_logiciel',
+          teams: [
+            {
+              name: 'Côté mécanique',
+              role: 'Identification sur Onshape d\'un modèle 3D à cinématique proche du WidowX AI, entièrement redimensionné à l\'échelle réelle, puis impression 3D des pièces sur mesure. Le laboratoire disposait déjà de servomoteurs récupérés sur un autre robot : 6 Dynamixel XC430-W150-T et 2 Dynamixel XC330-M288-T, directement réutilisés dans la conception.',
+            },
+            {
+              name: 'Côté logiciel',
+              role: 'Extension de la classe Robot de GELLO via les fonctions de haut niveau natives du WidowX AI. Calcul et configuration des offsets pour garantir une synchronisation fluide entre les deux bras.',
+            },
+          ],
+        },
+        {
+          title: 'limites_rencontrées',
+          body: 'Lors de l\'inventaire matériel, certains servomoteurs Dynamixel prévus dans la modélisation s\'avéraient indisponibles à l\'achat. Les modèles alternatifs disponibles étaient fonctionnellement équivalents, mais bien plus encombrants.',
+          items: [
+            'Modèle prévu : Dynamixel XC330-M288-T — indisponible à la commande',
+            'Modèle retenu : Dynamixel XC430-W150-T — même fonction, encombrement nettement supérieur',
+            'Refonte complète du châssis 3D pour intégrer les XC430-W150-T sans compromettre la cinématique',
+          ],
+          images: ['/Dynamixel XC330-M288-T.jpeg', '/Dynamixel XC430-W150-T.jpeg'],
+          imageCaptions: ['XC330-M288-T — Modèle prévu (indisponible)', 'XC430-W150-T — Modèle retenu'],
+        },
+        {
+          title: 'état_actuel_et_conclusion',
+          body: 'Le projet est aujourd\'hui à un stade de développement très avancé. Les étapes restantes avant les tests finaux de téléopération en conditions réelles sont les suivantes :',
+          items: [
+            'Finalisation des ajustements dimensionnels sur la structure mécanique',
+            'Étalonnage définitif des offsets logiciels entre les deux bras',
+            'Tests finaux de téléopération sur le robot WidowX AI en conditions réelles',
+          ],
+        },
       ],
     },
   },

@@ -230,10 +230,19 @@
           }
         }
 
-        // Image de section
+        // Image(s) de section
         let sectionImage = '';
-        if (s.image) {
-          sectionImage = `<img src="${s.image}" alt="${s.title}" style="width:100%; border-radius:6px; margin-top:0.5rem; max-height:200px; object-fit:contain;" />`;
+        const imgs = s.images ?? (s.image ? [s.image] : []);
+        if (imgs.length) {
+          sectionImage = `<div style="display:grid; grid-template-columns:repeat(${imgs.length},1fr); gap:0.5rem; margin-top:0.5rem;">
+            ${imgs.map((src: string, idx: number) => {
+              const caption = s.imageCaptions?.[idx];
+              return `<div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
+                <img src="${src}" alt="${caption ?? s.title}" style="width:100%; border-radius:6px; max-height:200px; object-fit:contain;" />
+                ${caption ? `<p style="font-family:monospace; font-size:0.6rem; color:${color}; text-align:center;">${caption}</p>` : ''}
+              </div>`;
+            }).join('')}
+          </div>`;
         }
 
         // Docs de section
