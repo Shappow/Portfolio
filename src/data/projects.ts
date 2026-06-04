@@ -336,6 +336,11 @@ export const projects: Project[] = [
       context: 'Stage R&D au Tanaka Lab (Japon). Dans le cadre du projet HAMSTER, l\'objectif est d\'implémenter un système d\'apprentissage par imitation (Imitation Learning) sur un bras robotique WidowX AI. Pour résoudre le problème de pollution visuelle lors des enregistrements, on m\'a confié la mise en place d\'un système de téléopération : un bras maître (pilote) à 6 axes contrôle le bras esclave à distance, garantissant des enregistrements vidéo propres, sans présence humaine à l\'image.',
       sections: [
         {
+          title: 'contexte_visuel',
+          image: '/Robot_compare.jpg',
+          imageCaptions: ['Bras leader (blanc) et bras follower (noir)'],
+        },
+        {
           title: 'base_du_projet',
           body: 'Pour mener à bien cette mission, je me suis appuyé sur l\'architecture du projet open-source GELLO. Ce framework a été spécifiquement pensé pour simplifier l\'intégration logicielle et matérielle de systèmes de téléopération entre deux bras robotiques. L\'avantage majeur de GELLO réside dans les configurations de bras de référence déjà implémentées, fournissant une excellente base de départ qui a grandement accéléré le lancement du projet.',
           items: [
@@ -355,6 +360,7 @@ export const projects: Project[] = [
         {
           title: 'solutions_mécanique_/_logiciel',
           image: '/FACTR Assembly.png',
+          imageCaptions: ['Modèle 3D du bras robotique'],
           teams: [
             {
               name: 'Côté mécanique',
