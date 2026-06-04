@@ -331,7 +331,7 @@ export const projects: Project[] = [
     stack: ['Modélisation 3D', 'Onshape', 'Python', 'Impression 3D', 'Linux'],
     status: 'wip',
     featured: true,
-    image: '/FACTR Assembly.png',
+    image: '/Real_robot.jpg',
     details: {
       context: 'Stage R&D au Tanaka Lab (Japon). Dans le cadre du projet HAMSTER, l\'objectif est d\'implémenter un système d\'apprentissage par imitation (Imitation Learning) sur un bras robotique WidowX AI. Pour résoudre le problème de pollution visuelle lors des enregistrements, on m\'a confié la mise en place d\'un système de téléopération : un bras maître (pilote) à 6 axes contrôle le bras esclave à distance, garantissant des enregistrements vidéo propres, sans présence humaine à l\'image.',
       sections: [
@@ -354,6 +354,7 @@ export const projects: Project[] = [
         },
         {
           title: 'solutions_mécanique_/_logiciel',
+          image: '/FACTR Assembly.png',
           teams: [
             {
               name: 'Côté mécanique',
