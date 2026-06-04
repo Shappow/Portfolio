@@ -200,7 +200,7 @@
     // Sections textuelles libres
     const sectionsCont = document.getElementById('modal-sections')!;
     if (d.sections?.length) {
-      const colors = ['#A78BFA', '#38BDF8', '#F59E0B', 'var(--accent-teal)', '#4ADE80', '#F472B6'];
+      const colors = ['#A78BFA', '#38BDF8', '#F59E0B', '#00D4B8', '#4ADE80', '#F472B6'];
       sectionsCont.innerHTML = d.sections.map((s: any, i: number) => {
         const color = colors[i % colors.length];
         let inner = '';

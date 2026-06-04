@@ -359,8 +359,6 @@ export const projects: Project[] = [
         },
         {
           title: 'solutions_mécanique_/_logiciel',
-          image: '/FACTR Assembly.png',
-          imageCaptions: ['Modèle 3D du bras robotique'],
           teams: [
             {
               name: 'Côté mécanique',
@@ -371,6 +369,11 @@ export const projects: Project[] = [
               role: 'Extension de la classe Robot de GELLO via les fonctions de haut niveau natives du WidowX AI. Calcul et configuration des offsets pour garantir une synchronisation fluide entre les deux bras.',
             },
           ],
+        },
+        {
+          title: 'modèle_3d',
+          image: '/FACTR Assembly.png',
+          imageCaptions: ['Modèle 3D du bras robotique'],
         },
         {
           title: 'limites_rencontrées',
